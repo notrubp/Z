@@ -18,6 +18,28 @@
 
   log.info('test', '--------------------');
 
+  async.append(function(success, failure) {
+    scheduler.deferred(function() {
+      success()
+    });
+  })
+  .append(function(success, failure) {
+    scheduler.deferred(function() {
+      try {
+        throw "Error?"
+      } catch (e) {
+        failure(e)
+      }
+    });
+  })
+  .success(function() {
+  })
+  .failure(function() {
+  })
+  .commit()
+
+  log.info('test', '--------------------');
+
   try {
     throw "something wrong here";
   } catch (e) {
