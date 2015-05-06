@@ -5,6 +5,7 @@
   log.tags.disable('test');
   log.info('test', 'should not see this');
 
+  log.tags.enable('exception');
   log.tags.enable('test');
 
   log.info('test', random.ratio());
@@ -18,23 +19,84 @@
 
   log.info('test', '--------------------');
 
-  async.append(function(success, failure) {
-    scheduler.deferred(function() {
+  asynchronous.success(function() {
+    log.info('test', 'asynchronous.success()');
+  }).commit()
+
+  asynchronous.success(function() {
+    log.info('test', 'should see this');
+  })
+
+  asynchronous.append(function(success, failure) {
+  })
+  .success(function() {
+    log.info('test', 'should see this');
+  })
+  .commit()
+
+  asynchronous.append(function(success, failure) {
+    setTimeout(function() {
+      log.info('test', 'asynchronous[0]');
       success()
-    });
+    }, 1000);
+  })
+  .success(function() {
+    log.info('test', 'asynchronous.success()');
   })
   .append(function(success, failure) {
+    log.info('test', 'asynchronous[1]');
+
+    try {
+      throw "Error?"
+    } catch (e) {
+      failure(e)
+    }
+  })
+  .failure(function(failure_reasons) {
+    log.info('test', 'asynchronous.failure()');
+
+    failure_reasons.forEach(function(reason) {
+      exception.handle(reason);
+    });
+  })
+  .commit()
+
+  asynchronous.append(function(success, failure) {
+    setTimeout(function() {
+      success()
+    }, 2000);
+  })
+  .success(function() {
+    log.info('test', 'asynchronous.success()');
+  })
+  .commit()
+
+  asynchronous.ordered(true)
+  .failure(function() {
+    log.info('test', 'ordered.failure()');
+  })
+  .append(function(success, failure) {
+    log.info('test', 'ordered[0]');
+
+    setTimeout(function() {
+      log.info('test', 'ordered[0].success()');
+      success()
+    }, 1000);
+  })
+  .append(function(success, failure) {
+    log.info('test', 'ordered[1]');
+
     scheduler.deferred(function() {
       try {
         throw "Error?"
       } catch (e) {
+        log.info('test', 'ordered[1].failure()');
         failure(e)
       }
     });
   })
   .success(function() {
-  })
-  .failure(function() {
+    log.info('test', 'ordered.success()');
   })
   .commit()
 

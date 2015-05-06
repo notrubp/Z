@@ -206,7 +206,6 @@
       }
       case 'sleeping' : {
         log.info('property', 'awake');
-
         last = time.now();
       }
       case 'flushing' : {
@@ -391,7 +390,7 @@
   /*
   */
   property.bind = function(element, property, value, time, wait_for_next_frame) {
-    callback = this.set.bind(this, element, property, value);
+    var callback = this.set.bind(this, element, property, value);
     this.enqueue(element, callback, time, wait_for_next_frame);
   }
 
