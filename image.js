@@ -1,7 +1,7 @@
 (function(global) {
   /**
   */
-  var image = { };
+  var Image = { };
 
   /**
   */
@@ -9,7 +9,7 @@
 
   /**
   */
-  image.get = function(url) {
+  Image.get = function(url) {
     if (url in images) {
       return;
     }
@@ -23,5 +23,5 @@
 
   /**
   */
-  global.image = image;
+  global.Image = Image;
 })(window);

@@ -1,7 +1,7 @@
 (function(global) {
   /*
   */
-  var util = global.util;
+  var Util = global.Util;
 
   /*
   */
@@ -15,26 +15,26 @@
 
   /*
   */
-  var binding = function() {
+  var Binding = function() {
     this.none();
   }
 
   /*
   */
-  binding.prototype.__property_hook = function() {
+  Binding.prototype.__propertyHook = function() {
     return this.css;
   }
   
   /*
   */
-  binding.prototype.none = function() {
+  Binding.prototype.none = function() {
     this.css = 'none';
     return this;
   }
 
   /*
   */
-  binding.prototype.matrix = function(xx, xy, yx, yy, tx, ty) {
+  Binding.prototype.matrix = function(xx, xy, yx, yy, tx, ty) {
     fixup(this);
     this.css += 'matrix(' + xx + ',' + xy + ',' + yx + ',' + yy + ',' + tx + ',' + ty + ')';
     return this;
@@ -42,7 +42,7 @@
 
   /*
   */
-  binding.prototype.matrix3d = function(xx, xy, xz, xw, yx, yy, yz, yw, zx, zy, zz, zw, tx, ty, tz, tw) {
+  Binding.prototype.matrix3d = function(xx, xy, xz, xw, yx, yy, yz, yw, zx, zy, zz, zw, tx, ty, tz, tw) {
     fixup(this);
     this.css += 'matrix3d(' + xx + ',' + xy + ',' + xz + ',' + xw + ',' + yx + ',' + yy + ',' + yz + ',' + yw + ',' + zx + ',' + zy + ',' + zz + ',' + zw + ',' + tx + ',' + ty + ',' + tz + ',' + tw + ')';
     return this;
@@ -50,7 +50,7 @@
 
   /*
   */
-  binding.prototype.translate = function(x, y) {
+  Binding.prototype.translate = function(x, y) {
     fixup(this);
     this.css += 'translate(' + x + ',' + y + ')';
     return this;
@@ -58,7 +58,7 @@
 
   /*
   */
-  binding.prototype.translate3d = function(x, y, z) {
+  Binding.prototype.translate3d = function(x, y, z) {
     fixup(this);
     this.css += 'translate3d(' + x + ',' + y + ',' + z + ')';
     return this;
@@ -66,7 +66,7 @@
 
   /*
   */
-  binding.prototype.translatex = function(x) {
+  Binding.prototype.translateX = function(x) {
     fixup(this);
     this.css += 'translateX(' + x + ')';
     return this;
@@ -74,7 +74,7 @@
 
   /*
   */
-  binding.prototype.translatey = function(y) {
+  Binding.prototype.translateY = function(y) {
     fixup(this);
     this.css += 'translateY(' + y + ')';
     return this;
@@ -82,7 +82,7 @@
 
   /*
   */
-  binding.prototype.translatez = function(z) {
+  Binding.prototype.translateZ = function(z) {
     fixup(this);
     this.css += 'translateZ(' + z + ')';
     return this;
@@ -90,7 +90,7 @@
 
   /*
   */
-  binding.prototype.scale = function(x, y) {
+  Binding.prototype.scale = function(x, y) {
     fixup(this);
     this.css += 'scale(' + x + ',' + y + ')';
     return this;
@@ -98,7 +98,7 @@
 
   /*
   */
-  binding.prototype.scale3d = function(x, y, z) {
+  Binding.prototype.scale3d = function(x, y, z) {
     fixup(this);
     this.css += 'scale3d(' + x + ',' + y + ',' + z + ')';
     return this;
@@ -106,7 +106,7 @@
 
   /*
   */
-  binding.prototype.scalex = function(x) {
+  Binding.prototype.scaleX = function(x) {
     fixup(this);
     this.css += 'scaleX(' + x + ')';
     return this;
@@ -114,7 +114,7 @@
 
   /*
   */
-  binding.prototype.scaley = function(y) {
+  Binding.prototype.scaleY = function(y) {
     fixup(this);
     this.css += 'scaleY(' + y + ')';
     return this;
@@ -122,7 +122,7 @@
 
   /*
   */
-  binding.prototype.scalez = function(z) {
+  Binding.prototype.scaleZ = function(z) {
     fixup(this);
     this.css += 'scaleZ(' + z + ')';
     return this;
@@ -130,7 +130,7 @@
 
   /*
   */
-  binding.prototype.rotate = function(a) {
+  Binding.prototype.rotate = function(a) {
     fixup(this);
     this.css += 'rotate(' + a + 'rad)';
     return this;
@@ -138,7 +138,7 @@
 
   /*
   */
-  binding.prototype.rotate3d = function(x, y, z) {
+  Binding.prototype.rotate3d = function(x, y, z) {
     fixup(this);
     this.css += 'rotate3d(' + x + 'rad,' + y + 'rad,' + z + 'rad)';
     return this;
@@ -146,7 +146,7 @@
 
   /*
   */
-  binding.prototype.rotatex = function(x) {
+  Binding.prototype.rotateX = function(x) {
     fixup(this);
     this.css += 'rotateX(' + x + 'rad)';
     return this;
@@ -154,7 +154,7 @@
 
   /*
   */
-  binding.prototype.rotatey = function(y) {
+  Binding.prototype.rotateY = function(y) {
     fixup(this);
     this.css += 'rotateY(' + y + 'rad)';
     return this;
@@ -162,7 +162,7 @@
 
   /*
   */
-  binding.prototype.rotatez = function(z) {
+  Binding.prototype.rotateZ = function(z) {
     fixup(this);
     this.css += 'rotateZ(' + z + 'rad)';
     return this;
@@ -170,7 +170,7 @@
 
   /*
   */
-  binding.prototype.skew = function(x, y) {
+  Binding.prototype.skew = function(x, y) {
     fixup(this);
     this.css += 'skew(' + x + 'rad,' + y + 'rad)';
     return this;
@@ -178,7 +178,7 @@
 
   /*
   */
-  binding.prototype.skewx = function(x) {
+  Binding.prototype.skewX = function(x) {
     fixup(this);
     this.css += 'skewX(' + x + 'rad)';
     return this;
@@ -186,7 +186,7 @@
 
   /*
   */
-  binding.prototype.skewy = function(y) {
+  Binding.prototype.skewY = function(y) {
     fixup(this);
     this.css += 'skewY(' + y + 'rad)';
     return this;
@@ -194,93 +194,93 @@
 
   /*
   */
-  var transform = {};
+  var Transform = {};
 
   /*
   */
-  transform.none = util.make_binding_wrapper(binding, binding.prototype.none);
+  Transform.none = Util.makeBindingWrapper(Binding, Binding.prototype.none);
 
   /*
   */
-  transform.matrix = util.make_binding_wrapper(binding, binding.prototype.matrix);
+  Transform.matrix = Util.makeBindingWrapper(Binding, Binding.prototype.matrix);
 
   /*
   */
-  transform.matrix3d = util.make_binding_wrapper(binding, binding.prototype.matrix3d);
+  Transform.matrix3d = Util.makeBindingWrapper(Binding, Binding.prototype.matrix3d);
 
   /*
   */
-  transform.translate = util.make_binding_wrapper(binding, binding.prototype.translate);
+  Transform.translate = Util.makeBindingWrapper(Binding, Binding.prototype.translate);
 
   /*
   */
-  transform.translate3d = util.make_binding_wrapper(binding, binding.prototype.translate3d);
+  Transform.translate3d = Util.makeBindingWrapper(Binding, Binding.prototype.translate3d);
 
   /*
   */
-  transform.translatex = util.make_binding_wrapper(binding, binding.prototype.translatex);
+  Transform.translateX = Util.makeBindingWrapper(Binding, Binding.prototype.translateX);
 
   /*
   */
-  transform.translatey = util.make_binding_wrapper(binding, binding.prototype.translatey);
+  Transform.translateY = Util.makeBindingWrapper(Binding, Binding.prototype.translateY);
 
   /*
   */
-  transform.translatez = util.make_binding_wrapper(binding, binding.prototype.translatez);
+  Transform.translateZ = Util.makeBindingWrapper(Binding, Binding.prototype.translateZ);
 
   /*
   */
-  transform.scale = util.make_binding_wrapper(binding, binding.prototype.scale);
+  Transform.scale = Util.makeBindingWrapper(Binding, Binding.prototype.scale);
 
   /*
   */
-  transform.scale3d = util.make_binding_wrapper(binding, binding.prototype.scale3d);
+  Transform.scale3d = Util.makeBindingWrapper(Binding, Binding.prototype.scale3d);
 
   /*
   */
-  transform.scalex = util.make_binding_wrapper(binding, binding.prototype.scalex);
+  Transform.scaleX = Util.makeBindingWrapper(Binding, Binding.prototype.scaleX);
 
   /*
   */
-  transform.scaley = util.make_binding_wrapper(binding, binding.prototype.scaley);
+  Transform.scaleY = Util.makeBindingWrapper(Binding, Binding.prototype.scaleY);
 
   /*
   */
-  transform.scalez = util.make_binding_wrapper(binding, binding.prototype.scalez);
+  Transform.scaleZ = Util.makeBindingWrapper(Binding, Binding.prototype.scaleZ);
 
   /*
   */
-  transform.rotate = util.make_binding_wrapper(binding, binding.prototype.rotate);
+  Transform.rotate = Util.makeBindingWrapper(Binding, Binding.prototype.rotate);
 
   /*
   */
-  transform.rotate3d = util.make_binding_wrapper(binding, binding.prototype.rotate3d);
+  Transform.rotate3d = Util.makeBindingWrapper(Binding, Binding.prototype.rotate3d);
 
   /*
   */
-  transform.rotatex = util.make_binding_wrapper(binding, binding.prototype.rotatex);
+  Transform.rotateX = Util.makeBindingWrapper(Binding, Binding.prototype.rotateX);
 
   /*
   */
-  transform.rotatey = util.make_binding_wrapper(binding, binding.prototype.rotatey);
+  Transform.rotateY = Util.makeBindingWrapper(Binding, Binding.prototype.rotateY);
 
   /*
   */
-  transform.rotatez = util.make_binding_wrapper(binding, binding.prototype.rotatez);
+  Transform.rotateZ = Util.makeBindingWrapper(Binding, Binding.prototype.rotateZ);
 
   /*
   */
-  transform.skew = util.make_binding_wrapper(binding, binding.prototype.skew);
+  Transform.skew = Util.makeBindingWrapper(Binding, Binding.prototype.skew);
 
   /*
   */
-  transform.skewx = util.make_binding_wrapper(binding, binding.prototype.skewx);
+  Transform.skewX = Util.makeBindingWrapper(Binding, Binding.prototype.skewX);
 
   /*
   */
-  transform.skewy = util.make_binding_wrapper(binding, binding.prototype.skewy);
+  Transform.skewY = Util.makeBindingWrapper(Binding, Binding.prototype.skewY);
 
   /*
   */
-  global.transform = transform;
+  global.Transform = Transform;
 })(window);

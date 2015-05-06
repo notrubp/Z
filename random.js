@@ -1,27 +1,27 @@
 (function(global) {
   /*
   */
-  var random = {};
+  var Random = {};
 
   /*
   */
-  random.ratio = function() {
+  Random.ratio = function() {
     return Math.random();
   }
 
   /*
   */
-  random.number = function() {
+  Random.number = function() {
     return Math.floor(Math.random() * 4294967296) - 2147483648;
   }
 
   /*
   */
-  random.range = function(upper_bound) {
-    return Math.floor(Math.random() * upper_bound);
+  Random.range = function(upperBound) {
+    return Math.floor(Math.random() * upperBound);
   }
 
   /*
   */
-  global.random = random;
+  global.Random = Random;
 })(window);

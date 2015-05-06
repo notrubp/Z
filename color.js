@@ -1,11 +1,12 @@
 (function(global) {
   /*
   */
-  var util = global.util;
+  var Util = global.Util;
+  var Random = global.Random;
 
   /*
   */
-  var binding = function(r, g, b, a) {
+  var Binding = function(r, g, b, a) {
     this.r = r || 0;
     this.g = g || 0;
     this.b = b || 0;
@@ -14,13 +15,13 @@
 
   /*
   */
-  binding.prototype.__property_hook = function() {
+  Binding.prototype.__propertyHook = function() {
     return 'rgba(' + this.r + ',' + this.g + ',' + this.b + ',' + this.a + ')';
   }
 
   /*
   */
-  binding.prototype.rgb = function(r, g, b) {
+  Binding.prototype.rgb = function(r, g, b) {
     this.r = r;
     this.g = g;
     this.b = b;
@@ -29,7 +30,7 @@
 
   /*
   */
-  binding.prototype.rgba = function(r, g, b, a) {
+  Binding.prototype.rgba = function(r, g, b, a) {
     this.r = r;
     this.g = g;
     this.b = b;
@@ -39,37 +40,37 @@
 
   /*
   */
-  binding.prototype.random_rgb = function() {
-    return this.random_rgba(1);
+  Binding.prototype.randomRgb = function() {
+    return this.randomRgba(1);
   }
 
   /*
   */
-  binding.prototype.random_rgba = function(a) {
-    return this.rgba(random.range(255), random.range(255), random.range(255), a);
+  Binding.prototype.randomRgba = function(a) {
+    return this.rgba(Random.range(255), Random.range(255), Random.range(255), a);
   }
 
   /*
   */
-  var color = {};
+  var Color = {};
 
   /*
   */
-  color.rgb = util.make_binding_wrapper(binding, binding.prototype.rgb);
+  Color.rgb = Util.makeBindingWrapper(Binding, Binding.prototype.rgb);
 
   /*
   */
-  color.rgba = util.make_binding_wrapper(binding, binding.prototype.rgba);
+  Color.rgba = Util.makeBindingWrapper(Binding, Binding.prototype.rgba);
 
   /*
   */
-  color.random_rgb = util.make_binding_wrapper(binding, binding.prototype.random_rgb);
+  Color.randomRgb = Util.makeBindingWrapper(Binding, Binding.prototype.randomRgb);
 
   /*
   */
-  color.random_rgba = util.make_binding_wrapper(binding, binding.prototype.random_rgba);
+  Color.randomRgba = Util.makeBindingWrapper(Binding, Binding.prototype.randomRgba);
 
   /*
   */
-  global.color = color;
+  global.Color = Color;
 })(window);

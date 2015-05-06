@@ -1,7 +1,11 @@
 (function(global) {
+  /**
+  */
+  var Random = global.Random;
+
   /*
   */
-  var uuid = {};
+  var Uuid = {};
 
   /*
   */
@@ -9,15 +13,15 @@
 
   /*
   */
-  function rfc4122_replacer(match, offset, string) {
-    var j = random.range(chars.length);
+  function rfc4122Replacer(match, offset, string) {
+    var j = Random.range(chars.length);
     return chars[offset == 19 ? (j & 0x3) | 0x8 : j & 0xf];
   }
 
   /*
   */
-  uuid.rfc4122 = function() {
-    return '00000000-0000-4000-0000-000000000000'.replace(/0/g, rfc4122_replacer);
+  Uuid.rfc4122 = function() {
+    return '00000000-0000-4000-0000-000000000000'.replace(/0/g, rfc4122Replacer);
   }
 
   /*
@@ -26,13 +30,13 @@
 
   /*
   */
-  uuid.letters = function(length) {
+  Uuid.letters = function(length) {
     length = length || 36;
 
     var out = '';
 
     for (var i = 0; i < length; ++i) {
-      var j = random.range(letters.length);
+      var j = Random.range(letters.length);
       out += letters[j];
     }
 
@@ -41,5 +45,5 @@
 
   /*
   */
-  global.uuid = uuid;
+  global.Uuid = Uuid;
 })(window);

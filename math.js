@@ -1,11 +1,11 @@
 (function(global) {
   /**
    */
-  var math = {};
+  var Math = global.Math || {};
 
   /**
    */
-  math.lerp = function(s, e, r) {
+  Math.lerp = function(s, e, r) {
     return n + r * (e - s);
   }
 
@@ -44,117 +44,117 @@
 
   /**
    */
-  math.ease = {};
+  Math.ease = {};
 
   /**
    */
-  math.ease.inQuad = function(t, b, c, d) {
+  Math.ease.inQuad = function(t, b, c, d) {
     return c * (t /= d) * t + b;
   }
 
   /**
    */
-  math.ease.outQuad = function(t, b, c, d) {
+  Math.ease.outQuad = function(t, b, c, d) {
     return -c * (t /= d) * (t - 2) + b;
   }
 
   /**
    */
-  math.ease.inOutQuad = function(t, b, c, d) {
+  Math.ease.inOutQuad = function(t, b, c, d) {
     if ((t /= d / 2) < 1) return c / 2 * t * t + b;
     return -c / 2 * ((--t) * (t - 2) - 1) + b;
   }
 
   /**
    */
-  math.ease.inCubic = function(t, b, c, d) {
+  Math.ease.inCubic = function(t, b, c, d) {
     return c * (t /= d) * t * t + b;
   }
 
   /**
    */
-  math.ease.outCubic = function(t, b, c, d) {
+  Math.ease.outCubic = function(t, b, c, d) {
     return c * ((t = t / d - 1) * t * t + 1) + b;
   }
 
   /**
    */
-  math.ease.inOutCubic = function(t, b, c, d) {
+  Math.ease.inOutCubic = function(t, b, c, d) {
     if ((t /= d / 2) < 1) return c / 2 * t * t * t + b;
     return c / 2 * ((t -= 2) * t * t + 2) + b;
   }
 
   /**
    */
-  math.ease.inQuart = function(t, b, c, d) {
+  Math.ease.inQuart = function(t, b, c, d) {
     return c * (t /= d) * t * t * t + b;
   }
 
   /**
    */
-  math.ease.outQuart = function(t, b, c, d) {
+  Math.ease.outQuart = function(t, b, c, d) {
     return -c * ((t = t / d - 1) * t * t * t - 1) + b;
   }
 
   /**
    */
-  math.ease.inOutQuart = function(t, b, c, d) {
+  Math.ease.inOutQuart = function(t, b, c, d) {
     if ((t /= d / 2) < 1) return c / 2 * t * t * t * t + b;
     return -c / 2 * ((t -= 2) * t * t * t - 2) + b;
   }
 
   /**
    */
-  math.ease.inQuint = function(t, b, c, d) {
+  Math.ease.inQuint = function(t, b, c, d) {
     return c * (t /= d) * t * t * t * t + b;
   }
 
   /**
    */
-  math.ease.outQuint = function(t, b, c, d) {
+  Math.ease.outQuint = function(t, b, c, d) {
     return c * ((t = t / d - 1) * t * t * t * t + 1) + b;
   }
 
   /**
    */
-  math.ease.inOutQuint = function(t, b, c, d) {
+  Math.ease.inOutQuint = function(t, b, c, d) {
     if ((t /= d / 2) < 1) return c / 2 * t * t * t * t * t + b;
     return c / 2 * ((t -= 2) * t * t * t * t + 2) + b;
   }
 
   /**
    */
-  math.ease.inSine = function(t, b, c, d) {
+  Math.ease.inSine = function(t, b, c, d) {
     return -c * Math.cos(t / d * (Math.PI / 2)) + c + b;
   }
 
   /**
    */
-  math.ease.outSine = function(t, b, c, d) {
+  Math.ease.outSine = function(t, b, c, d) {
     return c * Math.sin(t / d * (Math.PI / 2)) + b;
   }
 
   /**
    */
-  math.ease.inOutSine = function(t, b, c, d) {
+  Math.ease.inOutSine = function(t, b, c, d) {
     return -c / 2 * (Math.cos(Math.PI * t / d) - 1) + b;
   }
 
   /**
    */
-  math.ease.inExpo = function(t, b, c, d) {
+  Math.ease.inExpo = function(t, b, c, d) {
     return (t == 0) ? b : c * Math.pow(2, 10 * (t / d - 1)) + b;
   }
 
   /**
    */
-  math.ease.outExpo = function(t, b, c, d) {
+  Math.ease.outExpo = function(t, b, c, d) {
     return (t == d) ? b + c : c * (-Math.pow(2, -10 * t / d) + 1) + b;
   }
 
   /**
    */
-  math.ease.inOutExpo = function(t, b, c, d) {
+  Math.ease.inOutExpo = function(t, b, c, d) {
     if (t == 0) return b;
     if (t == d) return b + c;
     if ((t /= d / 2) < 1) return c / 2 * Math.pow(2, 10 * (t - 1)) + b;
@@ -163,26 +163,26 @@
 
   /**
    */
-  math.ease.inCirc = function(t, b, c, d) {
+  Math.ease.inCirc = function(t, b, c, d) {
     return -c * (Math.sqrt(1 - (t /= d) * t) - 1) + b;
   }
 
   /**
    */
-  math.ease.outCirc = function(t, b, c, d) {
+  Math.ease.outCirc = function(t, b, c, d) {
     return c * Math.sqrt(1 - (t = t / d - 1) * t) + b;
   }
 
   /**
    */
-  math.ease.inOutCirc = function(t, b, c, d) {
+  Math.ease.inOutCirc = function(t, b, c, d) {
     if ((t /= d / 2) < 1) return -c / 2 * (Math.sqrt(1 - t * t) - 1) + b;
     return c / 2 * (Math.sqrt(1 - (t -= 2) * t) + 1) + b;
   }
 
   /**
    */
-  math.ease.inElastic = function(t, b, c, d) {
+  Math.ease.inElastic = function(t, b, c, d) {
     var s = 1.70158;
     var p = 0;
     var a = c;
@@ -198,7 +198,7 @@
 
   /**
    */
-  math.ease.outElastic = function(t, b, c, d) {
+  Math.ease.outElastic = function(t, b, c, d) {
     var s = 1.70158;
     var p = 0;
     var a = c;
@@ -214,7 +214,7 @@
 
   /**
    */
-  math.ease.inOutElastic = function(t, b, c, d) {
+  Math.ease.inOutElastic = function(t, b, c, d) {
     var s = 1.70158;
     var p = 0;
     var a = c;
@@ -231,21 +231,21 @@
 
   /**
    */
-  math.ease.inBack = function(t, b, c, d, s) {
+  Math.ease.inBack = function(t, b, c, d, s) {
     if (s == undefined) s = 1.70158;
     return c * (t /= d) * t * ((s + 1) * t - s) + b;
   }
 
   /**
    */
-  math.ease.outBack = function(t, b, c, d, s) {
+  Math.ease.outBack = function(t, b, c, d, s) {
     if (s == undefined) s = 1.70158;
     return c * ((t = t / d - 1) * t * ((s + 1) * t + s) + 1) + b;
   }
 
   /**
    */
-  math.ease.inOutBack = function(t, b, c, d, s) {
+  Math.ease.inOutBack = function(t, b, c, d, s) {
     if (s == undefined) s = 1.70158;
     if ((t /= d / 2) < 1) return c / 2 * (t * t * (((s *= (1.525)) + 1) * t - s)) + b;
     return c / 2 * ((t -= 2) * t * (((s *= (1.525)) + 1) * t + s) + 2) + b;
@@ -253,13 +253,13 @@
 
   /**
    */
-  math.ease.inBounce = function(t, b, c, d) {
-    return c - math.ease.outBounce(d - t, 0, c, d) + b;
+  Math.ease.inBounce = function(t, b, c, d) {
+    return c - Math.ease.outBounce(d - t, 0, c, d) + b;
   }
 
   /**
    */
-  math.ease.outBounce = function(t, b, c, d) {
+  Math.ease.outBounce = function(t, b, c, d) {
     if ((t /= d) < (1 / 2.75)) {
       return c * (7.5625 * t * t) + b;
     } else if (t < (2 / 2.75)) {
@@ -273,12 +273,12 @@
 
   /**
    */
-  math.ease.inOutBounce = function(t, b, c, d) {
-    if (t < d / 2) return math.ease.inBounce(t * 2, 0, c, d) * .5 + b;
-    return math.ease.outBounce(t * 2 - d, 0, c, d) * .5 + c * .5 + b;
+  Math.ease.inOutBounce = function(t, b, c, d) {
+    if (t < d / 2) return Math.ease.inBounce(t * 2, 0, c, d) * .5 + b;
+    return Math.ease.outBounce(t * 2 - d, 0, c, d) * .5 + c * .5 + b;
   }
 
   /**
    */
-  global.math = math;
+  global.Math = Math;
 })(window);

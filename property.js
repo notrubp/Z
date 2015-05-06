@@ -1,29 +1,30 @@
 (function(global) {
   /*
   */
-  var platform = global.platform;
-  var exception = global.exception;
-  var time = global.time;
-  var scheduler = global.scheduler;
-  var log = global.log;
+  var Platform = global.Platform;
+  var Exception = global.Exception;
+  var Time = global.Time;
+  var Scheduler = global.Scheduler;
+  var Log = global.Log;
+  var Uuid = global.Uuid;
 
   /*
   */
-  var property = {};
+  var Property = {};
 
   /*
   */
-  function ensure_uid(element) {
-    if (!element.__property_uid) {
-      element.__property_uid = uuid.letters();
+  function ensureUid(element) {
+    if (!element.__propertyUid) {
+      element.__propertyUid = Uuid.letters();
     }
   }
 
   /*
    * A fake element for global hooks and queues.
   */
-  property.global = {
-    '__property_uid' : uuid.letters()
+  Property.global = {
+    '__propertyUid' : Uuid.letters()
   };
 
   /*
@@ -32,7 +33,7 @@
 
   /*
   */
-  function add_hook(uid, hook) {
+  function addHook(uid, hook) {
     if (!hooks[uid]) {
       hooks[uid] = [];
     }
@@ -44,18 +45,18 @@
 
   /*
   */
-  property.hook = function(element, hook) {
-    ensure_uid(element);
-    return add_hook(element.__property_uid, hook);
+  Property.hook = function(element, hook) {
+    ensureUid(element);
+    return addHook(element.__propertyUid, hook);
   }
 
   /*
   */
-  function try_hooks(element, property, value) {
-    var uid = element.__property_uid;
+  function tryHooks(element, property, value) {
+    var uid = element.__propertyUid;
 
     if (hooks[uid]) {
-      return hooks[uid].reduce(_try_hooks.bind(null, element, property, value), false);
+      return hooks[uid].reduce(TryHooks.bind(null, element, property, value), false);
     }
 
     return false;
@@ -63,7 +64,7 @@
 
   /*
   */
-  function _try_hooks(element, property, value, handled, hook) {
+  function TryHooks(element, property, value, handled, hook) {
     return hook(element, property, value) === true || handled;
   }
 
@@ -73,7 +74,7 @@
 
   /*
   */
-  var has_next = false;
+  var hasNext = false;
 
   /*
   */
@@ -82,24 +83,24 @@
   /*
   */
   function flush(timestamp) {
-    log.info('property', 'flushing');
+    Log.info('property', 'flushing');
 
     state = 'flushing';
 
-    last = time.now();
+    last = Time.now();
 
-    has_next = false;
+    hasNext = false;
 
     // Go through all the queues and evaluate the entries.
     Object.keys(queues).forEach(_flush);
       
-    if (has_next) {
+    if (hasNext) {
       schedule();
     } else {
-      log.info('property', 'sleeping');
+      Log.info('property', 'sleeping');
 
       state = 'sleeping';
-      scheduler.raf(gc);
+      Scheduler.raf(gc);
     }
   }
 
@@ -113,70 +114,70 @@
     while (queue.length > 0) {
       var binding = queue[0];
 
-      if (binding.wait_for_next_frame) {
-        log.info('property', 'blocking -> ' + key);
+      if (binding.waitForNextFrame) {
+        Log.info('property', 'blocking -> ' + key);
 
         // Mark as no longer blocking.
-        binding.wait_for_next_frame = false;
+        binding.waitForNextFrame = false;
         
         // This entry needs a fresh frame before it can be applied.
         break;
       }
 
-      // apply_binding() is a try catch block taken out of this function so compilers
-      // can optimize properly, apply_binding() is expected to not be optimized.
-      var result = apply_binding(binding);
+      // applyBinding() is a try catch block taken out of this function so compilers
+      // can optimize properly, applyBinding() is expected to not be optimized.
+      var result = applyBinding(binding);
 
-      var should_break = false;
+      var shouldBreak = false;
 
       switch (result) {
         case 'ok' : {
-          log.info('property', 'applied -> ' + key);
+          Log.info('property', 'applied -> ' + key);
 
           // Entry is ready to be removed.
-          safe_remove_binding(queue, binding);
+          safeRemoveBinding(queue, binding);
 
           // Entry has been applied break out if it's set to.
-          if (binding.break_current_frame) {
-            should_break = true;
+          if (binding.breakCurrentFrame) {
+            shouldBreak = true;
           }
 
           break;
         }
         case 'fail' : {
-          log.error('property', 'fail -> ' + key);
+          Log.error('property', 'fail -> ' + key);
 
           // Entry may have not completed correctly, but an exception was thrown
           // and it needs to be removed.
-          safe_remove_binding(queue, binding);
+          safeRemoveBinding(queue, binding);
         }
         default : {
           // This entry did not apply, wait for the
           // next frame.
-          should_break = true;
+          shouldBreak = true;
 
           break;
         }          
       }
 
-      if (should_break) {
+      if (shouldBreak) {
         break;
       }
     }
 
-    has_next = has_next || queue.length > 0;
+    hasNext = hasNext || queue.length > 0;
   }
 
   /*
   */
-  function apply_binding(binding) {
+  function applyBinding(binding) {
     var result = 'none';
 
     try {
       result = last < binding.time || binding.callback() === false ? 'none' : 'ok';
     } catch (e) {
       // Dont block flush() with exception handling, instead schedule the handler for later.
-      exception.deferred(e);
+      Exception.deferred(e);
 
       result = 'fail';
     }
@@ -186,7 +187,7 @@
 
   /*
   */
-  function safe_remove_binding(queue, binding) {
+  function safeRemoveBinding(queue, binding) {
     if (queue.length > 0 && queue[0] === binding) {
       queue.shift();
     }
@@ -205,12 +206,12 @@
         break;
       }
       case 'sleeping' : {
-        log.info('property', 'awake');
-        last = time.now();
+        Log.info('property', 'awake');
+        last = Time.now();
       }
       case 'flushing' : {
         state = 'awake';
-        scheduler.raf(flush);
+        Scheduler.raf(flush);
         break;        
       }
     }
@@ -222,8 +223,8 @@
 
   /*
   */
-  function ensure_queue(element) {
-    var uid = element.__property_uid;
+  function ensureQueue(element) {
+    var uid = element.__propertyUid;
       
     if (!queues[uid]) {
       queues[uid] = [];
@@ -234,14 +235,14 @@
 
   /*
   */
-  function insert_binding(queue, callback, time, wait_for_next_frame) {
+  function insertBinding(queue, callback, time, waitForNextFrame) {
     time = time || 0;
 
     var binding = { 
       'callback' : callback,
       'time' : time, 
-      'break_current_frame' : time > 0,
-      'wait_for_next_frame' : wait_for_next_frame 
+      'breakCurrentFrame' : time > 0,
+      'waitForNextFrame' : waitForNextFrame 
     };
 
     var i = -1;
@@ -277,7 +278,7 @@
 
   /*
   */
-  function camel_case_property(prop) {
+  function camelCaseProperty(prop) {
     function replacer(match, p1) {
       return p1.toUpperCase();
     }
@@ -287,12 +288,12 @@
 
   /*
   */
-  var force_camel_case_property = false;
+  var forceCamelCaseProperty = false;
 
   /*
   */
-  if (platform.is_gecko) {
-    force_camel_case_property = true;
+  if (Platform.isGecko) {
+    forceCamelCaseProperty = true;
 
     fixups['animation'] = '-moz-animation';
     fixups['animation-delay'] = '-moz-animation-delay';
@@ -311,7 +312,7 @@
 
   /*
   */
-  if (platform.is_trident) {
+  if (Platform.isTrident) {
     fixups['transform'] = '-ms-transform';
     fixups['transform-origin'] = '-ms-transform-origin';
     fixups['transition'] = '-ms-transition';
@@ -319,7 +320,7 @@
 
   /*
   */
-  if (platform.is_opera) {
+  if (Platform.isOpera) {
     fixups['transform'] = '-o-transform';
     fixups['transform-origin'] = '-o-transform-origin';
     fixups['transition'] = '-o-transition';
@@ -327,7 +328,7 @@
 
   /*
   */
-  if (platform.is_webkit) {
+  if (Platform.isWebkit) {
     fixups['animation'] = '-webkit-animation';
     fixups['animation-delay'] = '-webkit-animation-delay';
     fixups['animation-name'] = '-webkit-animation-name';
@@ -348,9 +349,9 @@
    * @param {string} a css property
    * @return {string} a css fixedup css property
   */
-  property.fixup = function(prop) {
-    prop = this.fixup_nocc(prop);
-    prop = force_camel_case_property ? camel_case_property(prop) : prop;
+  Property.fixup = function(prop) {
+    prop = this.fixupNocc(prop);
+    prop = forceCamelCaseProperty ? camelCaseProperty(prop) : prop;
     return prop;
   }
   
@@ -360,7 +361,7 @@
    * @param {string} a css property
    * @return {string} a css fixedup css property
   */
-  property.fixup_nocc = function(prop) {
+  Property.fixupNocc = function(prop) {
     return fixups[prop] || prop;
   }
 
@@ -371,32 +372,32 @@
    * @param property
    * @param value
    */
-  property.set = function(element, prop, value) {
-    ensure_uid(element);
+  Property.set = function(element, prop, value) {
+    ensureUid(element);
 
     // Evaluate property fixups.
     prop = this.fixup(prop);
 
     // Evaluate property hook on objects.
-    value = value != null && typeof value.__property_hook === 'function' ? value.__property_hook() : value;
+    value = value != null && typeof value.__propertyHook === 'function' ? value.__propertyHook() : value;
 
-    log.info('property', 'set(' + element.__property_uid + ', ' + prop + ', ' + value + ')');
+    Log.info('property', 'set(' + element.__propertyUid + ', ' + prop + ', ' + value + ')');
 
-    if (!try_hooks(this.global, prop, value) && !try_hooks(element, prop, value)) {
+    if (!tryHooks(this.global, prop, value) && !tryHooks(element, prop, value)) {
       element.style[prop] = value;
     }
   }
 
   /*
   */
-  property.bind = function(element, property, value, time, wait_for_next_frame) {
+  Property.bind = function(element, property, value, time, waitForNextFrame) {
     var callback = this.set.bind(this, element, property, value);
-    this.enqueue(element, callback, time, wait_for_next_frame);
+    this.enqueue(element, callback, time, waitForNextFrame);
   }
 
   /*
   */
-  property.get = function(element, property) {
+  Property.get = function(element, property) {
     return element.style[property];
   }
 
@@ -406,8 +407,8 @@
    * @param element
    * @param property
    */
-  property.remove = function(element, property) {
-    log.info('property', 'remove(' + element.__property_uid + ', ' + property + ')');
+  Property.remove = function(element, property) {
+    Log.info('property', 'remove(' + element.__propertyUid + ', ' + property + ')');
 
     this.set(element, property, null);
   }
@@ -418,28 +419,28 @@
    * @param element
    * @param binding 
   */
-  property.enqueue = function(element, callback, time, wait_for_next_frame) {
-    ensure_uid(element);
+  Property.enqueue = function(element, callback, time, waitForNextFrame) {
+    ensureUid(element);
     schedule();
-    queue = ensure_queue(element);
-    insert_binding(queue, callback, time, wait_for_next_frame);
+    queue = ensureQueue(element);
+    insertBinding(queue, callback, time, waitForNextFrame);
   }
 
   /*
   */
-  property.wipe = function(element) {
-    ensure_uid(element);
-    queue = ensure_queue(element);
+  Property.wipe = function(element) {
+    ensureUid(element);
+    queue = ensureQueue(element);
     queue.splice(0, queue.length);
   }
 
   /*
   */
-  property.force_reflow = function(element) {
+  Property.forceReflow = function(element) {
     element.offsetWidth = element.offsetWidth;
   }
 
   /*
   */
-  global.property = property;
+  global.Property = Property;
 })(window);

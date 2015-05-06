@@ -1,7 +1,7 @@
 (function(global) {
   /*
   */
-  var platform = { }
+  var Platform = { }
 
   /*
   */
@@ -9,85 +9,85 @@
     {
       string: navigator.userAgent,
       substring: "Chrome",
-      version_search: "Chrome",
+      versionSearch: "Chrome",
       identity: "chrome"
     },
     {
       string: navigator.userAgent,
       substring: "OmniWeb",
       identity: "omniweb",
-      version_search: "OmniWeb/"
+      versionSearch: "OmniWeb/"
     },
     {
       string: navigator.userAgent,
       substring: "Android",
       identity: "safari",
-      version_search: "Version"
+      versionSearch: "Version"
     },
     {
       string: navigator.vendor,
       substring: "Apple",
       identity: "safari",
-      version_search: "Version"
+      versionSearch: "Version"
     },
     {
       prop: window.opera,
       identity: "opera",
-      version_search: "Version"
+      versionSearch: "Version"
     },
     {
       string: navigator.vendor,
       substring: "iCab",
       identity: "icab",
-      version_search: "iCab"
+      versionSearch: "iCab"
     },
     {
       string: navigator.vendor,
       substring: "KDE",
       identity: "konqueror",
-      version_search: "Konqueror"
+      versionSearch: "Konqueror"
     },
     {
       string: navigator.userAgent,
       substring: "Firefox",
       identity: "firefox",
-      version_search: "Firefox"
+      versionSearch: "Firefox"
     },
     {
       string: navigator.vendor,
       substring: "Camino",
       identity: "camino",
-      version_search: "Camino"
+      versionSearch: "Camino"
     },
     {
       string: navigator.userAgent,
       substring: "Netscape",
       identity: "netscape",
-      version_search: "netscape"
+      versionSearch: "netscape"
     },
     {
       string: navigator.userAgent,
       substring: "MSIE",
       identity: "explorer",
-      version_search: "MSIE"
+      versionSearch: "MSIE"
     },
     {
       string: navigator.userAgent,
       substring: "Trident/7.0",
       identity: "explorer11",
-      version_search: "rv"
+      versionSearch: "rv"
     },
     {
       string: navigator.userAgent,
       substring: "Gecko",
       identity: "mozilla",
-      version_search: "rv"
+      versionSearch: "rv"
     }, 
     {
       string: navigator.userAgent,
       substring: "Mozilla",
       identity: "netscape",
-      version_search: "Mozilla"
+      versionSearch: "Mozilla"
     }
   ];
 
@@ -109,7 +109,7 @@
       string: navigator.platform,
       substring: "Mac",
       identity: "mac",
-      version_search: "X"
+      versionSearch: "X"
     },
     {
       string: navigator.userAgent,
@@ -140,15 +140,15 @@
 
   /*
   */
-  var version_search;
+  var versionSearch;
 
   /*
   */
-  function search_string(data) {
+  function searchString(data) {
     for (var i = 0; i < data.length; i++) {
       var string = data[i].string;
       var prop = data[i].prop;
-      version_search = data[i].version_search || data[i].identity;
+      versionSearch = data[i].versionSearch || data[i].identity;
 
       if (string) {
         if (string.indexOf(data[i].substring) != -1) {
@@ -162,64 +162,64 @@
 
   /*
   */
-  function search_version(string) {
-    var index = string.indexOf(version_search);
+  function searchVersion(string) {
+    var index = string.indexOf(versionSearch);
 
     if (index == -1) {
       return;
     }
 
-    return parseFloat(string.substring(index + version_search.length + 1));
+    return parseFloat(string.substring(index + versionSearch.length + 1));
   }
 
   /*
    * Evaluate.
   */
 
-  platform.browser = search_string(browser) || "unknown";
-  platform.version = search_version(navigator.userAgent) || search_version(navigator.appVersion) || 0;
-  platform.os = search_string(os) || "unknown";
-  platform.os_version = "" + (search_version(navigator.userAgent) || search_version(navigator.appVersion) || 0);
+  Platform.browser = searchString(browser) || "unknown";
+  Platform.version = searchVersion(navigator.userAgent) || searchVersion(navigator.appVersion) || 0;
+  Platform.os = searchString(os) || "unknown";
+  Platform.osVersion = "" + (searchVersion(navigator.userAgent) || searchVersion(navigator.appVersion) || 0);
 
-  platform.is_chrome = platform.browser === 'chrome';
-  platform.is_omniweb = platform.browser === 'omniweb';
-  platform.is_safari = platform.browser === 'safari'
-  platform.is_opera = platform.browser === 'opera';
-  platform.is_icab = platform.browser === 'icab';
-  platform.is_konqueror = platform.browser === 'konqueror';
-  platform.is_firefox = platform.browser === 'firefox';
-  platform.is_camino = platform.browser === 'camino';
-  platform.is_netscape = platform.browser === 'netscape';
-  platform.is_explorer = platform.browser === 'explorer';
-  platform.is_explorer9 = platform.is_explorer && platform.version === 9;
-  platform.is_explorer10 = platform.is_explorer && platform.version === 10;
-  platform.is_explorer11 = platform.browser === 'explorer11';
-  platform.is_mozilla = platform.browser === 'mozilla';
-  platform.is_gecko = platform.is_firefox || platform.is_mozilla || platform.is_konqueror;
-  platform.is_trident = platform.is_explorer;
-  platform.is_webkit = platform.is_safari || platform.is_chrome || platform.is_omniweb || platform.is_opera || platform.is_camino;
+  Platform.isChrome = Platform.browser === 'chrome';
+  Platform.isOmniweb = Platform.browser === 'omniweb';
+  Platform.isSafari = Platform.browser === 'safari'
+  Platform.isOpera = Platform.browser === 'opera';
+  Platform.isIcab = Platform.browser === 'icab';
+  Platform.isKonqueror = Platform.browser === 'konqueror';
+  Platform.isFirefox = Platform.browser === 'firefox';
+  Platform.isCamino = Platform.browser === 'camino';
+  Platform.isNetscape = Platform.browser === 'netscape';
+  Platform.isExplorer = Platform.browser === 'explorer';
+  Platform.isExplorer9 = Platform.isExplorer && Platform.version === 9;
+  Platform.isExplorer10 = Platform.isExplorer && Platform.version === 10;
+  Platform.isExplorer11 = Platform.browser === 'explorer11';
+  Platform.isMozilla = Platform.browser === 'mozilla';
+  Platform.isGecko = Platform.isFirefox || Platform.isMozilla || Platform.isKonqueror;
+  Platform.isTrident = Platform.isExplorer;
+  Platform.isWebkit = Platform.isSafari || Platform.isChrome || Platform.isOmniweb || Platform.isOpera || Platform.isCamino;
 
-  platform.is_windows = platform.os === 'windows';
-  platform.is_mac = platform.os === 'mac';
-  platform.is_ipod = platform.os == 'ipod';
-  platform.is_iphone = platform.os === 'iphone';
-  platform.is_ipad = platform.os === 'ipad';
-  platform.is_linux = platform.os === 'linux';
-  platform.is_android = platform.os === 'android';
-  platform.is_windowsphone = platform.os === 'windowsphone';
+  Platform.isWindows = Platform.os === 'windows';
+  Platform.isMac = Platform.os === 'mac';
+  Platform.isIpod = Platform.os == 'ipod';
+  Platform.isIphone = Platform.os === 'iphone';
+  Platform.isIpad = Platform.os === 'ipad';
+  Platform.isLinux = Platform.os === 'linux';
+  Platform.isAndroid = Platform.os === 'android';
+  Platform.isWindowsphone = Platform.os === 'windowsphone';
 
-  platform.is_ios = platform.is_ipod || platform.is_iphone || platform.is_ipad;
+  Platform.isiOS = Platform.isIpod || Platform.isIphone || Platform.isIpad;
   
-  var ios_version = (function() {
+  var iOSVersion = (function() {
     return 0;
   })();
 
-  platform.is_ios5 = ios_version >= 5 && ios_version < 6;
-  platform.is_ios6 = ios_version >= 6 && ios_version < 7;
-  platform.is_ios7 = ios_version >= 7 && ios_version < 8;
-  platform.is_ios8 = ios_version >= 8 && ios_version < 9;
+  Platform.isiOS5 = iOSVersion >= 5 && iOSVersion < 6;
+  Platform.isiOS6 = iOSVersion >= 6 && iOSVersion < 7;
+  Platform.isiOS7 = iOSVersion >= 7 && iOSVersion < 8;
+  Platform.isiOS8 = iOSVersion >= 8 && iOSVersion < 9;
 
-  var android_version = (function() {
+  var androidVersion = (function() {
     var s = 'Android';
     var ua = navigator.userAgent;
     var i = ua.indexOf(s);
@@ -231,19 +231,19 @@
     return 0;
   })();
 
-  platform.is_android15 = android_version >= 4.4 && android_version < 4.4;
-  platform.is_android16 = android_version >= 4.4 && android_version < 4.4;
-  platform.is_android17 = android_version >= 4.4 && android_version < 4.4;
-  platform.is_android18 = android_version >= 4.4 && android_version < 4.4;
-  platform.is_android19 = android_version >= 4.4 && android_version < 4.4;
-  platform.is_android20 = android_version >= 5.0 && android_version < 4.4;
+  Platform.isAndroid15 = androidVersion >= 4.4 && androidVersion < 4.4;
+  Platform.isAndroid16 = androidVersion >= 4.4 && androidVersion < 4.4;
+  Platform.isAndroid17 = androidVersion >= 4.4 && androidVersion < 4.4;
+  Platform.isAndroid18 = androidVersion >= 4.4 && androidVersion < 4.4;
+  Platform.isAndroid19 = androidVersion >= 4.4 && androidVersion < 4.4;
+  Platform.isAndroid20 = androidVersion >= 5.0 && androidVersion < 4.4;
 
-  platform.is_touch = 'ontouchstart' in window || 'onmsgesturechange' in window;
+  Platform.isTouch = 'ontouchstart' in window || 'onmsgesturechange' in window;
 
-  platform.is_desktop = platform.is_windows || platform.is_mac || platform.is_linux;
-  platform.is_mobile = platform.is_ios || platform.is_android || platform.is_windowsphone;
+  Platform.isDesktop = Platform.isWindows || Platform.isMac || Platform.isLinux;
+  Platform.isMobile = Platform.isiOS || Platform.isAndroid || Platform.isWindowsphone;
 
   /*
   */
-  global.platform = platform;
+  global.Platform = Platform;
 })(window);

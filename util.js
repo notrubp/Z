@@ -1,17 +1,17 @@
 (function(global) {
   /*
   */
-  var util = {};
+  var Util = {};
 
   /*
   */
-  util.make_binding_wrapper = function(constructor, member) {
+  Util.makeBindingWrapper = function(ctor, member) {
     return function() {
-      return member.apply(new constructor(), arguments);
+      return member.apply(new ctor(), arguments);
     }
   }
 
   /*
   */
-  global.util = util;
+  global.Util = Util;
 })(window);

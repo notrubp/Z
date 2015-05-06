@@ -1,15 +1,15 @@
 (function(global) {
   /*
   */
-  var time = {};
+  var Time = {};
 
   /*
   */
-  time.now = function() {
+  Time.now = function() {
     return new Date().getTime();
   }
 
   /*
   */
-  global.time = time;
+  global.Time = Time;
 })(window);

@@ -1,28 +1,28 @@
 (function(global) {
   /*
   */
-  var util = global.util;
-  var property = global.property;
+  var Util = global.Util;
+  var Property = global.Property;
 
   /*
   */
-  var binding = function() {
+  var Binding = function() {
     this.clear();
   }
 
   /*
   */
-  binding.prototype.__property_hook = function() {
+  Binding.prototype.__propertyHook = function() {
     return this.css;
   }
 
-  binding.prototype.clear = function() {
+  Binding.prototype.clear = function() {
     this.css = '';
   }
 
   /*
   */
-  binding.prototype.bind = function(prop, duration, timing, delay) {
+  Binding.prototype.bind = function(prop, duration, timing, delay) {
     duration = duration || 0;
     timing = timing || 'ease';
     delay = delay || 0;
@@ -32,7 +32,7 @@
     }
 
     // Evaluate property fixups.
-    prop = property.fixup_nocc(prop);
+    prop = Property.fixupNocc(prop);
 
     this.css += prop + ' ' + duration + 's ' + timing + ' ' + delay + 's';
 
@@ -41,17 +41,17 @@
 
   /*
   */
-  var transition = {};
+  var Transition = {};
 
   /*
   */
-  transition.clear = util.make_binding_wrapper(binding, binding.prototype.clear);
+  Transition.clear = Util.makeBindingWrapper(Binding, Binding.prototype.clear);
 
   /*
   */
-  transition.bind = util.make_binding_wrapper(binding, binding.prototype.bind);
+  Transition.bind = Util.makeBindingWrapper(Binding, Binding.prototype.bind);
 
   /*
   */
-  global.transition = transition;
+  global.Transition = Transition;
 })(window);

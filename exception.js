@@ -1,21 +1,26 @@
 (function(global) {
-  /*
+  /**
   */
-  var exception = {};
+  var Log = global.Log;
+  var Scheduler = global.Scheduler;
 
   /*
   */
-  exception.handle = function(exception) {
-    log.error('exception', exception.hasOwnProperty('stack') ? exception.stack : exception);
+  var Exception = {};
+
+  /*
+  */
+  Exception.handle = function(exception) {
+    Log.error('exception', exception.hasOwnProperty('stack') ? exception.stack : exception);
   }
 
   /*
   */
-  exception.deferred = function(exception) {
-    scheduler.deferred(this.handle.bind(this, exception));
+  Exception.deferred = function(exception) {
+    Scheduler.deferred(this.handle.bind(this, exception));
   }
 
   /*
   */
-  global.exception = exception;
+  global.Exception = Exception;
 })(window);

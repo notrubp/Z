@@ -1,7 +1,7 @@
 (function(global) {
   /*
   */
-  var log = {};
+  var Log = {};
 
   /*
   */
@@ -17,28 +17,28 @@
 
   /*
   */
-  log.info = logger.bind(console, console.info);
+  Log.info = logger.bind(console, console.info);
 
   /*
   */
-  log.debug = logger.bind(console, console.debug); 
+  Log.debug = logger.bind(console, console.debug); 
 
   /*
   */
-  log.warn = logger.bind(console, console.warn);
+  Log.warn = logger.bind(console, console.warn);
 
   /*
   */
-  log.error = logger.bind(console, console.error);
+  Log.error = logger.bind(console, console.error);
 
 
   /*
   */
-  log.tags = {};
+  Log.Tags = {};
 
   /*
   */
-  log.tags.enable = function(tag) {
+  Log.Tags.enable = function(tag) {
     if (tags.indexOf(tag) == -1) {
       tags.push(tag);
     }
@@ -46,7 +46,7 @@
 
   /*
   */
-  log.tags.disable = function(tag) {
+  Log.Tags.disable = function(tag) {
     var i = tags.indexOf(tag);
 
     if (i != -1) {
@@ -56,17 +56,17 @@
 
   /*
   */
-  log.tags.enabled = function(tag) {
+  Log.Tags.enabled = function(tag) {
     return tags.indexOf(tag) != -1;
   }
 
   /*
   */
-  log.tags.disable_all = function(tag) {
+  Log.Tags.disableAll = function(tag) {
     tags = [];
   }
 
   /*
   */
-  global.log = log;
+  global.Log = Log;
 })(window);

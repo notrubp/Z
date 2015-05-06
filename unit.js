@@ -1,7 +1,7 @@
 (function(global) {
   /*
   */
-  var unit = {}
+  var Unit = {}
 
   /*
   */
@@ -11,45 +11,45 @@
 
   /*
   */
-  unit.val = make.bind(null, '');
+  Unit.val = make.bind(null, '');
 
   /*
   */
-  unit.mm = make.bind(null, 'mm');
+  Unit.mm = make.bind(null, 'mm');
 
   /*
   */
-  unit.cm = make.bind(null, 'cm');
+  Unit.cm = make.bind(null, 'cm');
 
   /*
   */
-  unit.in = make.bind(null, 'in');
+  Unit.in = make.bind(null, 'in');
 
   /*
   */
-  unit.pc = make.bind(null, 'pc');
+  Unit.pc = make.bind(null, 'pc');
 
   /*
   */
-  unit.pt = make.bind(null, 'pt');
+  Unit.pt = make.bind(null, 'pt');
 
   /*
   */
-  unit.ex = make.bind(null, 'ex');
+  Unit.ex = make.bind(null, 'ex');
 
   /*
   */
-  unit.em = make.bind(null, 'em');
+  Unit.em = make.bind(null, 'em');
 
   /*
   */
-  unit.pct = make.bind(null, '%');
+  Unit.pct = make.bind(null, '%');
 
   /*
   */
-  unit.px = make.bind(null, 'px');
+  Unit.px = make.bind(null, 'px');
 
   /*
   */
-  global.unit = unit;
+  global.Unit = Unit;
 })(window);

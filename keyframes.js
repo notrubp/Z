@@ -1,19 +1,20 @@
 (function(global) {
   /*
   */
-  var platform = global.platform;
-  var property = global.property;
+  var Uuid = global.Uuid;
+  var Platform = global.Platform;
+  var Property = global.Property;
 
   /*
   */
-  var keyframes = function(name) {
-    this.name = name || uuid.letters();
+  var Keyframes = function(name) {
+    this.name = name || Uuid.letters();
     this.keyframes = {};
   }
 
   /*
   */
-  keyframes.prototype.at = function(percentage, prop, value) {
+  Keyframes.prototype.at = function(percentage, prop, value) {
     // Clamp.
     percentage = Math.min(1, percentage);
     percentage = Math.max(0, percentage);
@@ -22,10 +23,10 @@
     this.keyframes[percentage] = this.keyframes[percentage] || [];
 
     // Evaluate property fixups.
-    prop = property.fixup_nocc(prop);
+    prop = Property.fixupNocc(prop);
 
     // Fixup.
-    value = value != null && typeof value.__property_hook === 'function' ? value.__property_hook() : value;
+    value = value != null && typeof value.__propertyHook === 'function' ? value.__propertyHook() : value;
 
     // Append.
     this.keyframes[percentage].push({ 'property' : prop, 'value' : value });
@@ -37,13 +38,13 @@
 
   /*
   */
-  keyframes.prototype.after = function(percentage, property, value) {
+  Keyframes.prototype.after = function(percentage, property, value) {
     this.at(percentage + min, property, value);
   }
 
   /*
   */
-  keyframes.prototype.before = function(percentage, property, value) {
+  Keyframes.prototype.before = function(percentage, property, value) {
     this.at(percentage - min, property, value);
   }
 
@@ -66,11 +67,11 @@
     return p;
   }
 
-  var rulename = platform.is_webkit ? '@-webkit-keyframes' : '@keyframes';
+  var rulename = Platform.isWebkit ? '@-webkit-keyframes' : '@keyframes';
 
   /*
   */
-  keyframes.prototype.make = function() {
+  Keyframes.prototype.make = function() {
     return Object.keys(this.keyframes)
       .sort()
       .reduce(make.bind(null, this.keyframes), rulename + ' ' + this.name + ' {') + '}';
@@ -78,5 +79,5 @@
 
   /*
   */
-  global.keyframes = keyframes;
+  global.Keyframes = Keyframes;
 })(window);

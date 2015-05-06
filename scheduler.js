@@ -1,11 +1,11 @@
 (function(global) {
   /*
   */
-  var scheduler = {};
+  var Scheduler = {};
 
   /*
   */
-  scheduler.deferred = function(callback) {
+  Scheduler.deferred = function(callback) {
     return setTimeout(callback, 0);
   }
 
@@ -47,11 +47,11 @@
 
   /*
   */
-  scheduler.raf = function(callback) {
+  Scheduler.raf = function(callback) {
     return requestAnimationFrame(callback);
   }
 
   /*
   */
-  global.scheduler = scheduler;
+  global.Scheduler = Scheduler;
 })(window);
