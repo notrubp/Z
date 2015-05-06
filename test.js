@@ -93,8 +93,7 @@
     log.info('test', 'chain[2].success()');
   })
   .commit()
-
-  chain.ordered(true)
+  .ordered(true)
   .failure(function() {
     log.info('test', 'ordered.failure()');
   })
