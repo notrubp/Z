@@ -71,7 +71,7 @@
       function on_success() {
         if (is_ordered && links.length > 0) {
           next();
-        } else {
+        } else if (links.length == 0) {
           // Any failures are a failure.
           if (any_failure) {
             on_failure();
@@ -88,7 +88,7 @@
       function on_failure() {
         if (is_ordered && links.length > 0) {
           next();
-        } else {
+        } else if (links.length == 0) {
           failure_callbacks.forEach(function(callback) {
             callback(failure_reasons);
           });
@@ -146,33 +146,33 @@
 
   /**
   */
-  var asynchronous = {};
+  var chain = {};
 
   /**
   */
-  asynchronous.append = util.make_binding_wrapper(binding, binding.prototype.append);
+  chain.append = util.make_binding_wrapper(binding, binding.prototype.append);
 
   /**
   */
-  asynchronous.success = util.make_binding_wrapper(binding, binding.prototype.success);
+  chain.success = util.make_binding_wrapper(binding, binding.prototype.success);
 
   /**
   */
-  asynchronous.failure = util.make_binding_wrapper(binding, binding.prototype.failure);
+  chain.failure = util.make_binding_wrapper(binding, binding.prototype.failure);
 
   /**
   */
-  asynchronous.commit = util.make_binding_wrapper(binding, binding.prototype.commit);
+  chain.commit = util.make_binding_wrapper(binding, binding.prototype.commit);
 
   /**
   */
-  asynchronous.ordered = util.make_binding_wrapper(binding, binding.prototype.ordered);
+  chain.ordered = util.make_binding_wrapper(binding, binding.prototype.ordered);
 
   /**
   */
-  asynchronous.clear = util.make_binding_wrapper(binding, binding.prototype.clear);
+  chain.clear = util.make_binding_wrapper(binding, binding.prototype.clear);
 
   /**
   */
-  global.asynchronous = asynchronous;
+  global.chain = chain;
 })(window);

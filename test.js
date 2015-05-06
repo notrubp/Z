@@ -19,32 +19,32 @@
 
   log.info('test', '--------------------');
 
-  asynchronous.success(function() {
-    log.info('test', 'asynchronous.success()');
+  chain.success(function() {
+    log.info('test', 'chain.success()');
   }).commit()
 
-  asynchronous.success(function() {
-    log.info('test', 'should see this');
+  chain.success(function() {
+    log.info('test', 'should not see this');
   })
 
-  asynchronous.append(function(success, failure) {
+  chain.append(function(success, failure) {
   })
   .success(function() {
-    log.info('test', 'should see this');
+    log.info('test', 'should not see this');
   })
   .commit()
 
-  asynchronous.append(function(success, failure) {
+  chain.append(function(success, failure) {
     setTimeout(function() {
-      log.info('test', 'asynchronous[0]');
+      log.info('test', 'chain[0][0]');
       success()
     }, 1000);
   })
   .success(function() {
-    log.info('test', 'asynchronous.success()');
+    log.info('test', 'chain[0].success()');
   })
   .append(function(success, failure) {
-    log.info('test', 'asynchronous[1]');
+    log.info('test', 'chain[0][1]');
 
     try {
       throw "Error?"
@@ -53,7 +53,7 @@
     }
   })
   .failure(function(failure_reasons) {
-    log.info('test', 'asynchronous.failure()');
+    log.info('test', 'chain[0].failure()');
 
     failure_reasons.forEach(function(reason) {
       exception.handle(reason);
@@ -61,17 +61,40 @@
   })
   .commit()
 
-  asynchronous.append(function(success, failure) {
+  chain.append(function(success, failure) {
     setTimeout(function() {
       success()
     }, 2000);
   })
   .success(function() {
-    log.info('test', 'asynchronous.success()');
+    log.info('test', 'chain[1].success()');
   })
   .commit()
 
-  asynchronous.ordered(true)
+  chain.append(function(success, failure) {
+    success()
+  })
+  .append(function(success, failure) {
+    success()
+  })
+  .append(function(success, failure) {
+    success()
+  })
+  .append(function(success, failure) {
+    success()
+  })
+  .append(function(success, failure) {
+    success()
+  })
+  .append(function(success, failure) {
+    success()
+  })
+  .success(function() {
+    log.info('test', 'chain[2].success()');
+  })
+  .commit()
+
+  chain.ordered(true)
   .failure(function() {
     log.info('test', 'ordered.failure()');
   })
