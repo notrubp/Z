@@ -1,16 +1,45 @@
+/**
+ * Math utilities and helpers.
+ *
+ * MIT License
+ * Copyright (c) 2015 notrubp@gmail.com
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation 
+ * files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, 
+ * modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software 
+ * is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES 
+ * OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE 
+ * LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR 
+ * IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ *
+ * @license MIT
+ * @copyright notrubp@gmail.com 2015
+ */
 (function(global) {
   /**
+   * Math utilities and helpers.
+   * @namespace Math
    */
   var Math = global.Math || {};
 
   /**
+   * Linear interpolation.
+   * @function lerp
+   * @memberof Math
+   * @static
+   * @param {Number} s
+   * @param {Number} e
+   * @param {Number} r
    */
   Math.lerp = function(s, e, r) {
     return n + r * (e - s);
   }
 
   /*
-   *
    * TERMS OF USE - EASING EQUATIONS
    * 
    * Open source under the BSD License. 
@@ -33,128 +62,256 @@
    * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY 
    * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
    * MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE
-   *  COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
-   *  EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE
-   *  GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED 
+   * COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+   * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE
+   * GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED 
    * AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-   *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED 
+   * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED 
    * OF THE POSSIBILITY OF SUCH DAMAGE. 
-   *
    */
 
   /**
+   * Easing functions.
+   * @namespace Ease
+   * @memberof Math
    */
-  Math.ease = {};
+  Math.Ease = {};
 
   /**
+   * @function inQuad
+   * @memberof Math.Ease
+   * @static
+   * @param {Number} t
+   * @param {Number} b
+   * @param {Number} c
+   * @param {Number} d
    */
-  Math.ease.inQuad = function(t, b, c, d) {
+  Math.Ease.inQuad = function(t, b, c, d) {
     return c * (t /= d) * t + b;
   }
 
   /**
+   * @function outQuad
+   * @memberof Math.Ease
+   * @static
+   * @param {Number} t
+   * @param {Number} b
+   * @param {Number} c
+   * @param {Number} d
    */
-  Math.ease.outQuad = function(t, b, c, d) {
+  Math.Ease.outQuad = function(t, b, c, d) {
     return -c * (t /= d) * (t - 2) + b;
   }
 
   /**
+   * @function inOutQuad
+   * @memberof Math.Ease
+   * @static
+   * @param {Number} t
+   * @param {Number} b
+   * @param {Number} c
+   * @param {Number} d
    */
-  Math.ease.inOutQuad = function(t, b, c, d) {
+  Math.Ease.inOutQuad = function(t, b, c, d) {
     if ((t /= d / 2) < 1) return c / 2 * t * t + b;
     return -c / 2 * ((--t) * (t - 2) - 1) + b;
   }
 
   /**
+   * @function inCubic
+   * @memberof Math.Ease
+   * @static
+   * @param {Number} t
+   * @param {Number} b
+   * @param {Number} c
+   * @param {Number} d
    */
-  Math.ease.inCubic = function(t, b, c, d) {
+  Math.Ease.inCubic = function(t, b, c, d) {
     return c * (t /= d) * t * t + b;
   }
 
   /**
+   * @function outCubic
+   * @memberof Math.Ease
+   * @static
+   * @param {Number} t
+   * @param {Number} b
+   * @param {Number} c
+   * @param {Number} d
    */
-  Math.ease.outCubic = function(t, b, c, d) {
+  Math.Ease.outCubic = function(t, b, c, d) {
     return c * ((t = t / d - 1) * t * t + 1) + b;
   }
 
   /**
+   * @function inOutCubic
+   * @memberof Math.Ease
+   * @static
+   * @param {Number} t
+   * @param {Number} b
+   * @param {Number} c
+   * @param {Number} d
    */
-  Math.ease.inOutCubic = function(t, b, c, d) {
+  Math.Ease.inOutCubic = function(t, b, c, d) {
     if ((t /= d / 2) < 1) return c / 2 * t * t * t + b;
     return c / 2 * ((t -= 2) * t * t + 2) + b;
   }
 
   /**
+   * @function inQuart
+   * @memberof Math.Ease
+   * @static
+   * @param {Number} t
+   * @param {Number} b
+   * @param {Number} c
+   * @param {Number} d
    */
-  Math.ease.inQuart = function(t, b, c, d) {
+  Math.Ease.inQuart = function(t, b, c, d) {
     return c * (t /= d) * t * t * t + b;
   }
 
   /**
+   * @function outQuart
+   * @memberof Math.Ease
+   * @static
+   * @param {Number} t
+   * @param {Number} b
+   * @param {Number} c
+   * @param {Number} d
    */
-  Math.ease.outQuart = function(t, b, c, d) {
+  Math.Ease.outQuart = function(t, b, c, d) {
     return -c * ((t = t / d - 1) * t * t * t - 1) + b;
   }
 
   /**
+   * @function inOutQuart
+   * @memberof Math.Ease
+   * @static
+   * @param {Number} t
+   * @param {Number} b
+   * @param {Number} c
+   * @param {Number} d
    */
-  Math.ease.inOutQuart = function(t, b, c, d) {
+  Math.Ease.inOutQuart = function(t, b, c, d) {
     if ((t /= d / 2) < 1) return c / 2 * t * t * t * t + b;
     return -c / 2 * ((t -= 2) * t * t * t - 2) + b;
   }
 
   /**
+   * @function inQuint
+   * @memberof Math.Ease
+   * @static
+   * @param {Number} t
+   * @param {Number} b
+   * @param {Number} c
+   * @param {Number} d
    */
-  Math.ease.inQuint = function(t, b, c, d) {
+  Math.Ease.inQuint = function(t, b, c, d) {
     return c * (t /= d) * t * t * t * t + b;
   }
 
   /**
+   * @function outQuint
+   * @memberof Math.Ease
+   * @static
+   * @param {Number} t
+   * @param {Number} b
+   * @param {Number} c
+   * @param {Number} d
    */
-  Math.ease.outQuint = function(t, b, c, d) {
+  Math.Ease.outQuint = function(t, b, c, d) {
     return c * ((t = t / d - 1) * t * t * t * t + 1) + b;
   }
 
   /**
+   * @function inOutQuint
+   * @memberof Math.Ease
+   * @static
+   * @param {Number} t
+   * @param {Number} b
+   * @param {Number} c
+   * @param {Number} d
    */
-  Math.ease.inOutQuint = function(t, b, c, d) {
+  Math.Ease.inOutQuint = function(t, b, c, d) {
     if ((t /= d / 2) < 1) return c / 2 * t * t * t * t * t + b;
     return c / 2 * ((t -= 2) * t * t * t * t + 2) + b;
   }
 
   /**
+   * @function inQuad
+   * @memberof Math.Ease
+   * @static
+   * @param {Number} t
+   * @param {Number} b
+   * @param {Number} c
+   * @param {Number} d
    */
-  Math.ease.inSine = function(t, b, c, d) {
+  Math.Ease.inSine = function(t, b, c, d) {
     return -c * Math.cos(t / d * (Math.PI / 2)) + c + b;
   }
 
   /**
+   * @function outSine
+   * @memberof Math.Ease
+   * @static
+   * @param {Number} t
+   * @param {Number} b
+   * @param {Number} c
+   * @param {Number} d
    */
-  Math.ease.outSine = function(t, b, c, d) {
+  Math.Ease.outSine = function(t, b, c, d) {
     return c * Math.sin(t / d * (Math.PI / 2)) + b;
   }
 
   /**
+   * @function inOutSine
+   * @memberof Math.Ease
+   * @static
+   * @param {Number} t
+   * @param {Number} b
+   * @param {Number} c
+   * @param {Number} d
    */
-  Math.ease.inOutSine = function(t, b, c, d) {
+  Math.Ease.inOutSine = function(t, b, c, d) {
     return -c / 2 * (Math.cos(Math.PI * t / d) - 1) + b;
   }
 
   /**
+   * @function inExpo
+   * @memberof Math.Ease
+   * @static
+   * @param {Number} t
+   * @param {Number} b
+   * @param {Number} c
+   * @param {Number} d
    */
-  Math.ease.inExpo = function(t, b, c, d) {
+  Math.Ease.inExpo = function(t, b, c, d) {
     return (t == 0) ? b : c * Math.pow(2, 10 * (t / d - 1)) + b;
   }
 
   /**
+   * @function outExpo
+   * @memberof Math.Ease
+   * @static
+   * @param {Number} t
+   * @param {Number} b
+   * @param {Number} c
+   * @param {Number} d
    */
-  Math.ease.outExpo = function(t, b, c, d) {
+  Math.Ease.outExpo = function(t, b, c, d) {
     return (t == d) ? b + c : c * (-Math.pow(2, -10 * t / d) + 1) + b;
   }
 
   /**
+   * @function inOutExpo
+   * @memberof Math.Ease
+   * @static
+   * @param {Number} t
+   * @param {Number} b
+   * @param {Number} c
+   * @param {Number} d
    */
-  Math.ease.inOutExpo = function(t, b, c, d) {
+  Math.Ease.inOutExpo = function(t, b, c, d) {
     if (t == 0) return b;
     if (t == d) return b + c;
     if ((t /= d / 2) < 1) return c / 2 * Math.pow(2, 10 * (t - 1)) + b;
@@ -162,27 +319,55 @@
   }
 
   /**
+   * @function inCirc
+   * @memberof Math.Ease
+   * @static
+   * @param {Number} t
+   * @param {Number} b
+   * @param {Number} c
+   * @param {Number} d
    */
-  Math.ease.inCirc = function(t, b, c, d) {
+  Math.Ease.inCirc = function(t, b, c, d) {
     return -c * (Math.sqrt(1 - (t /= d) * t) - 1) + b;
   }
 
   /**
+   * @function outCirc
+   * @memberof Math.Ease
+   * @static
+   * @param {Number} t
+   * @param {Number} b
+   * @param {Number} c
+   * @param {Number} d
    */
-  Math.ease.outCirc = function(t, b, c, d) {
+  Math.Ease.outCirc = function(t, b, c, d) {
     return c * Math.sqrt(1 - (t = t / d - 1) * t) + b;
   }
 
   /**
+   * @function inOutCirc
+   * @memberof Math.Ease
+   * @static
+   * @param {Number} t
+   * @param {Number} b
+   * @param {Number} c
+   * @param {Number} d
    */
-  Math.ease.inOutCirc = function(t, b, c, d) {
+  Math.Ease.inOutCirc = function(t, b, c, d) {
     if ((t /= d / 2) < 1) return -c / 2 * (Math.sqrt(1 - t * t) - 1) + b;
     return c / 2 * (Math.sqrt(1 - (t -= 2) * t) + 1) + b;
   }
 
   /**
+   * @function inElastic
+   * @memberof Math.Ease
+   * @static
+   * @param {Number} t
+   * @param {Number} b
+   * @param {Number} c
+   * @param {Number} d
    */
-  Math.ease.inElastic = function(t, b, c, d) {
+  Math.Ease.inElastic = function(t, b, c, d) {
     var s = 1.70158;
     var p = 0;
     var a = c;
@@ -197,8 +382,15 @@
   }
 
   /**
+   * @function outElastic
+   * @memberof Math.Ease
+   * @static
+   * @param {Number} t
+   * @param {Number} b
+   * @param {Number} c
+   * @param {Number} d
    */
-  Math.ease.outElastic = function(t, b, c, d) {
+  Math.Ease.outElastic = function(t, b, c, d) {
     var s = 1.70158;
     var p = 0;
     var a = c;
@@ -213,8 +405,15 @@
   }
 
   /**
+   * @function inOutElastic
+   * @memberof Math.Ease
+   * @static
+   * @param {Number} t
+   * @param {Number} b
+   * @param {Number} c
+   * @param {Number} d
    */
-  Math.ease.inOutElastic = function(t, b, c, d) {
+  Math.Ease.inOutElastic = function(t, b, c, d) {
     var s = 1.70158;
     var p = 0;
     var a = c;
@@ -230,36 +429,71 @@
   }
 
   /**
+   * @function inBack
+   * @memberof Math.Ease
+   * @static
+   * @param {Number} t
+   * @param {Number} b
+   * @param {Number} c
+   * @param {Number} d
    */
-  Math.ease.inBack = function(t, b, c, d, s) {
+  Math.Ease.inBack = function(t, b, c, d, s) {
     if (s == undefined) s = 1.70158;
     return c * (t /= d) * t * ((s + 1) * t - s) + b;
   }
 
   /**
+   * @function outBack
+   * @memberof Math.Ease
+   * @static
+   * @param {Number} t
+   * @param {Number} b
+   * @param {Number} c
+   * @param {Number} d
    */
-  Math.ease.outBack = function(t, b, c, d, s) {
+  Math.Ease.outBack = function(t, b, c, d, s) {
     if (s == undefined) s = 1.70158;
     return c * ((t = t / d - 1) * t * ((s + 1) * t + s) + 1) + b;
   }
 
   /**
+   * @function inOutBack
+   * @memberof Math.Ease
+   * @static
+   * @param {Number} t
+   * @param {Number} b
+   * @param {Number} c
+   * @param {Number} d
    */
-  Math.ease.inOutBack = function(t, b, c, d, s) {
+  Math.Ease.inOutBack = function(t, b, c, d, s) {
     if (s == undefined) s = 1.70158;
     if ((t /= d / 2) < 1) return c / 2 * (t * t * (((s *= (1.525)) + 1) * t - s)) + b;
     return c / 2 * ((t -= 2) * t * (((s *= (1.525)) + 1) * t + s) + 2) + b;
   }
 
   /**
+   * @function inBounce
+   * @memberof Math.Ease
+   * @static
+   * @param {Number} t
+   * @param {Number} b
+   * @param {Number} c
+   * @param {Number} d
    */
-  Math.ease.inBounce = function(t, b, c, d) {
-    return c - Math.ease.outBounce(d - t, 0, c, d) + b;
+  Math.Ease.inBounce = function(t, b, c, d) {
+    return c - Math.Ease.outBounce(d - t, 0, c, d) + b;
   }
 
   /**
+   * @function outBounce
+   * @memberof Math.Ease
+   * @static
+   * @param {Number} t
+   * @param {Number} b
+   * @param {Number} c
+   * @param {Number} d
    */
-  Math.ease.outBounce = function(t, b, c, d) {
+  Math.Ease.outBounce = function(t, b, c, d) {
     if ((t /= d) < (1 / 2.75)) {
       return c * (7.5625 * t * t) + b;
     } else if (t < (2 / 2.75)) {
@@ -272,13 +506,21 @@
   }
 
   /**
+   * @function inOutBounce
+   * @memberof Math.Ease
+   * @static
+   * @param {Number} t
+   * @param {Number} b
+   * @param {Number} c
+   * @param {Number} d
    */
-  Math.ease.inOutBounce = function(t, b, c, d) {
-    if (t < d / 2) return Math.ease.inBounce(t * 2, 0, c, d) * .5 + b;
-    return Math.ease.outBounce(t * 2 - d, 0, c, d) * .5 + c * .5 + b;
+  Math.Ease.inOutBounce = function(t, b, c, d) {
+    if (t < d / 2) return Math.Ease.inBounce(t * 2, 0, c, d) * .5 + b;
+    return Math.Ease.outBounce(t * 2 - d, 0, c, d) * .5 + c * .5 + b;
   }
 
-  /**
+  /*
+   * Exports
    */
   global.Math = Math;
 })(window);
