@@ -93,7 +93,7 @@
     Log.info('test', 'Chain[2].success()');
   })
   .commit()
-  .ordered(true)
+  .setOrdered(true)
   .failure(function() {
     Log.info('test', 'Ordered.failure()');
   })
@@ -183,16 +183,16 @@
         var start = Transform.translate(Unit.px(x), Unit.px(y)).rotate(0);
         Property.set(div, 'transform', start);
 
-        var binding = Transition.bind('transform', 5, 'linear')
-          .bind('background-color', 5, 'linear');
+        var transition = Transition.set('transform', 5, 'linear')
+          .set('background-color', 5, 'linear');
 
-        Property.bind(div, 'transition', binding, 0, true);
+        Property.set(div, 'transition', transition, 0, true);
 
         var end = Transform.translate(Unit.px(x), Unit.px(y)).rotate((d ? 1 : -1) * Math.PI * 2 * 2);
-        Property.bind(div, 'transform', end);
+        Property.set(div, 'transform', end, 0);
 
         c = Color.randomRgb();
-        Property.bind(div, 'background-color', c);
+        Property.set(div, 'background-color', c);
       }
 
       div.addEventListener('transitionend', animate);
@@ -216,31 +216,25 @@
 
   document.addEventListener('DOMContentLoaded', function() {
     function rect(delay) {
-      var k = new Keyframes();
-
       var x = 1000;
       var y = 250;
 
-      k.at(0, 'transform', Transform.translate(Unit.px(x), Unit.px(y - 100)));
-      k.at(0.25, 'transform', Transform.translate(Unit.px(x + 100), Unit.px(y)));
-      k.at(0.5, 'transform', Transform.translate(Unit.px(x), Unit.px(y + 100)));
-      k.at(0.75, 'transform', Transform.translate(Unit.px(x - 100), Unit.px(y)));
-      k.at(1, 'transform', Transform.translate(Unit.px(x), Unit.px(y - 100)));
-
-      k.at(0, 'background-color', Color.randomRgb());
-      k.at(1, 'background-color', Color.randomRgb());
-
-      var style = document.createElement('style');
-      style.language = 'text/css';
-      style.appendChild(document.createTextNode(k.make()));
-      document.getElementsByTagName('head')[0].appendChild(style);
+      var name = Keyframes.at(0, 'transform', Transform.translate(Unit.px(x), Unit.px(y - 100)))
+        .at(0.25, 'transform', Transform.translate(Unit.px(x + 100), Unit.px(y)))
+        .at(0.5, 'transform', Transform.translate(Unit.px(x), Unit.px(y + 100)))
+        .at(0.75, 'transform', Transform.translate(Unit.px(x - 100), Unit.px(y)))
+        .at(1, 'transform', Transform.translate(Unit.px(x), Unit.px(y - 100)))
+        .at(0, 'background-color', Color.randomRgb())
+        .at(1, 'background-color', Color.randomRgb())
+        .inject()
+        .getName();
 
       var div = document.createElement('div');
       Property.set(div, 'position', 'absolute');
       Property.set(div, 'width', Unit.px(100));
       Property.set(div, 'height', Unit.px(100));
       Property.set(div, 'background-color', Color.randomRgb());
-      Property.set(div, 'animation-name', k.name);
+      Property.set(div, 'animation-name', name);
       Property.set(div, 'animation-duration', '1s');
       Property.set(div, 'animation-delay', delay + 's');
       Property.set(div, 'animation-fill-mode', 'both');
@@ -257,7 +251,7 @@
   Log.info('test', '--------------------');
 
   var div = document.createElement('div');
-  Property.bind(div, 'left', '0px');
+  Property.set(div, 'left', '0px');
 
   Log.info('test', Property.get(div, 'left'));
 
@@ -265,7 +259,7 @@
     Log.info('test', Property.get(div, 'left'));
   }, 0, true);
 
-  Property.bind(div, 'left', '1px');
+  Property.set(div, 'left', '1px', 0);
 
   Property.enqueue(div, function() {
     Log.info('test', Property.get(div, 'left'));
@@ -291,5 +285,5 @@
     Log.info('test', '1003');
   }, 1003);
 
-  Property.bind(div, 'left', '2px');
+  Property.set(div, 'left', '2px', 0);
 })();

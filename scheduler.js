@@ -1,17 +1,46 @@
+/**
+ * Scheduling utility.
+ *
+ * MIT License
+ * Copyright (c) 2015 notrubp@gmail.com
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation 
+ * files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, 
+ * modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software 
+ * is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES 
+ * OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE 
+ * LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR 
+ * IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ *
+ * @license MIT
+ * @copyright notrubp@gmail.com 2015
+ */
 (function(global) {
-  /*
-  */
+  /**
+   * Scheduling utility.
+   * @namespace Scheduler
+   */
   var Scheduler = {};
 
-  /*
-  */
+  /**
+   * Schedule a callback for later in the event loop.
+   * @function deferred
+   * @memberof Scheduler
+   * @static
+   * @param {function} callback
+   * @returns {Number} A setTimeout id.
+   */
   Scheduler.deferred = function(callback) {
     return setTimeout(callback, 0);
   }
 
   /*
    * requestAnimationFrame polyfill.
-  */
+   */
   var vendors = [ 'ms', 'moz', 'webkit', 'o' ];
 
   for ( var i = 0; i < vendors.length && !window.requestAnimationFrame; ++i) {
@@ -45,8 +74,15 @@
     window.cancelAnimationFrame = window.polyfillCancelAnimationFrame;
   }
 
-  /*
-  */
+  /**
+   * Schedule a callback for the next animation frame.
+   * {@link https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame}
+   * @function raf
+   * @memberof Scheduler
+   * @static
+   * @param {function} callback
+   * @returns {Number} A requestAnimationFrame id.
+   */
   Scheduler.raf = function(callback) {
     return requestAnimationFrame(callback);
   }

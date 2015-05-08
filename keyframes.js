@@ -154,7 +154,7 @@
     return p;
   }
 
-  var rulename = Platform.isWebkit ? '@-webkit-keyframes' : '@keyframes';
+  var rulename = Platform.isWebKit ? '@-webkit-keyframes' : '@keyframes';
 
   /**
    * Generate CSS with the current keyframes.
@@ -166,7 +166,7 @@
   Keyframes.prototype.generate = function() {
     return Object.keys(this.keyframes)
       .sort()
-      .reduce(make.bind(null, this.keyframes), rulename + ' ' + this.name + ' {') + '}';
+      .reduce(generate.bind(null, this.keyframes), rulename + ' ' + this.name + ' {') + '}';
   }
 
   /**

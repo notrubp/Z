@@ -358,7 +358,7 @@
     fixups['transition'] = '-o-transition';
   }
 
-  if (Platform.isWebkit) {
+  if (Platform.isWebKit) {
     fixups['animation'] = '-webkit-animation';
     fixups['animation-delay'] = '-webkit-animation-delay';
     fixups['animation-name'] = '-webkit-animation-name';
@@ -434,10 +434,13 @@
    * Property.set(element, 'background-color', 'white');
    *
    * // Set the background color to black 1 second from now.
-   * Property.set(element, 'background-color', 'black', new Date().getTime() + 1000);
+   * Property.set(element, 
+   *   'background-color', 
+   *   'black', 
+   *   new Date().getTime() + 1000);
    */
   Property.set = function(element, property, value, time, waitForNextFrame) {
-    if (time != null && time > 0) {
+    if (time != null) {
       this.enqueue(element, set.bind(this, element, property, value), time, waitForNextFrame);
     } else {
       set.call(this, element, property, value);
