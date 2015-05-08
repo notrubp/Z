@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: color.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: color.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * RGBA color object.
+ *
+ * MIT License
+ * Copyright (c) 2015 notrubp@gmail.com
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation 
+ * files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, 
+ * modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software 
+ * is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES 
+ * OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE 
+ * LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR 
+ * IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ *
+ * @license MIT
+ * @copyright notrubp@gmail.com 2015
+ */
+(function(global) {
+  /*
+   * Imports
+   */
+  var Util = global.Util;
+  var Random = global.Random;
+
+  /**
+   * RGBA color.
+   * @class Color
+   * @param {Number=} r
+   * @param {Number=} g
+   * @param {Number=} b
+   * @param {Number=} a
+   */
+  var Color = function(r, g, b, a) {
+    this.r = r || 0;
+    this.g = g || 0;
+    this.b = b || 0;
+    this.a = a || 1;
+  }
+
+  /*
+   * Property hook.
+   */
+  Color.prototype.__propertyHook = function() {
+    return 'rgba(' + this.r + ',' + this.g + ',' + this.b + ',' + this.a + ')';
+  }
+
+  /**
+   * Set RGB values.
+   * @function rgb
+   * @memberof Color
+   * @instance
+   * @param {Number} r
+   * @param {Number} g
+   * @param {Number} b
+   * @returns {Color}
+   */
+  Color.prototype.rgb = function(r, g, b) {
+    this.r = r;
+    this.g = g;
+    this.b = b;
+    return this;
+  }
+
+  /**
+   * Set RGBA values.
+   * @function rgba
+   * @memberof Color
+   * @instance
+   * @param {Number} r
+   * @param {Number} g
+   * @param {Number} b
+   * @param {Number} a
+   * @returns {Color}
+   */
+  Color.prototype.rgba = function(r, g, b, a) {
+    this.r = r;
+    this.g = g;
+    this.b = b;
+    this.a = a;
+    return this;
+  }
+
+  /**
+   * Set to random RGB values.
+   * @function randomRgb
+   * @memberof Color
+   * @instance
+   * @returns {Color}
+   */
+  Color.prototype.randomRgb = function() {
+    return this.randomRgba(1);
+  }
+
+  /**
+   * Set to random RGB values with option to set alpha.
+   * @function randomRgba
+   * @memberof Color
+   * @instance
+   * @param {Number} a
+   * @returns {Color}
+   */
+  Color.prototype.randomRgba = function(a) {
+    return this.rgba(Random.range(255), Random.range(255), Random.range(255), a);
+  }
+
+  /**
+   * Set the red value.
+   * @function setRed
+   * @memberof Color
+   * @instance
+   * @param {Number} r
+   * @returns {Color}
+   */
+  Color.prototype.setRed = function(r) {
+    this.r = r;
+    return this;
+  }
+
+  /**
+   * Get the red value.
+   * @function getRed
+   * @memberof Color
+   * @instance
+   * @returns {Number} The red value.
+   */
+  Color.prototype.getRed = function() {
+    return this.r;
+  }
+
+  /**
+   * Set the green value.
+   * @function setGreen
+   * @memberof Color
+   * @instance
+   * @param {Number} g
+   * @returns {Color}
+   */
+  Color.prototype.setGreen = function(g) {
+    this.g = g;
+    return this;
+  }
+
+  /**
+   * Get the green value.
+   * @function getGreen
+   * @memberof Color
+   * @instance
+   * @returns {Number} The green value.
+   */
+  Color.prototype.getGreen = function() {
+    return this.g;
+  }
+
+  /**
+   * Set the blue value.
+   * @function setBlue
+   * @memberof Color
+   * @instance
+   * @param {Number} b
+   * @returns {Color}
+   */
+  Color.prototype.setBlue = function(b) {
+    this.b = b;
+    return this;
+  }
+
+  /**
+   * Get the blue value.
+   * @function getBlue
+   * @memberof Color
+   * @instance
+   * @returns {Number} The blue value.
+   */
+  Color.prototype.getBlue = function() {
+    return this.b;
+  }
+
+  /**
+   * Set the alpha value.
+   * @function setAlpha
+   * @memberof Color
+   * @instance
+   * @param {Number} a
+   * @returns {Color}
+   */
+  Color.prototype.setAlpha = function(a) {
+    this.a = a;
+    return this;
+  }
+
+  /**
+   * Get the alpha value.
+   * @function getAlpha
+   * @memberof Color
+   * @instance
+   * @returns {Number} The alpha value.
+   */
+  Color.prototype.getAlpha = function() {
+    return this.a;
+  }
+  
+  /**
+   * @function rgb
+   * @memberof Color
+   * @static
+   * @see Color#rgb
+   * @returns {Color}
+   */
+  Color.rgb = Util.makeDaisyChain(Color, Color.prototype.rgb);
+
+  /**
+   * @function rgba
+   * @memberof Color
+   * @static
+   * @see Color#rgba
+   * @returns {Color}
+   */
+  Color.rgba = Util.makeDaisyChain(Color, Color.prototype.rgba);
+
+  /**
+   * @function randomRgb
+   * @memberof Color
+   * @static
+   * @see Color#randomRgb
+   * @returns {Color}
+   */
+  Color.randomRgb = Util.makeDaisyChain(Color, Color.prototype.randomRgb);
+
+  /**
+   * @function randomRgba
+   * @memberof Color
+   * @static
+   * @see Color#randomRgba
+   * @returns {Color}
+   */
+  Color.randomRgba = Util.makeDaisyChain(Color, Color.prototype.randomRgba);
+
+  /**
+   * @function setRed
+   * @memberof Color
+   * @static
+   * @see Color#setRed
+   * @returns {Color}
+   */
+  Color.setRed = Util.makeDaisyChain(Color, Color.prototype.setRed);
+
+  /**
+   * @function setGreen
+   * @memberof Color
+   * @static
+   * @see Color#setGreen
+   * @returns {Color}
+   */
+  Color.setGreen = Util.makeDaisyChain(Color, Color.prototype.setGreen);
+
+  /**
+   * @function setBlue
+   * @memberof Color
+   * @static
+   * @see Color#setBlue
+   * @returns {Color}
+   */
+  Color.setBlue = Util.makeDaisyChain(Color, Color.prototype.setBlue);
+
+  /**
+   * @function setAlpha
+   * @memberof Color
+   * @static
+   * @see Color#setAlpha
+   * @returns {Color}
+   */
+  Color.setAlpha = Util.makeDaisyChain(Color, Color.prototype.setAlpha);
+  
+  /*
+   * Exports
+   */
+  global.Color = Color;
+})(window);
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Chain.html">Chain</a></li><li><a href="Color.html">Color</a></li><li><a href="Keyframes.html">Keyframes</a></li><li><a href="Point.html">Point</a></li><li><a href="Rect.html">Rect</a></li><li><a href="Transform.html">Transform</a></li><li><a href="Transition.html">Transition</a></li></ul><h3>Namespaces</h3><ul><li><a href="Exception.html">Exception</a></li><li><a href="Log.html">Log</a></li><li><a href="Log.Tags.html">Tags</a></li><li><a href="Math.html">Math</a></li><li><a href="Math.Ease.html">Ease</a></li><li><a href="Platform.html">Platform</a></li><li><a href="Property.html">Property</a></li><li><a href="Scheduler.html">Scheduler</a></li><li><a href="Time.html">Time</a></li><li><a href="Unit.html">Unit</a></li><li><a href="Util.html">Util</a></li><li><a href="Uuid.html">Uuid</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-beta3</a> on Fri May 08 2015 17:31:33 GMT-0400 (EDT)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

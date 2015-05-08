@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: rect.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: rect.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * Represents a 2-dimentional rectangle.
+ *
+ * MIT License
+ * Copyright (c) 2015 notrubp@gmail.com
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation 
+ * files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, 
+ * modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software 
+ * is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES 
+ * OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE 
+ * LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR 
+ * IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ *
+ * @license MIT
+ * @copyright notrubp@gmail.com 2015
+ */
+(function(global) {
+  /*
+   * Imports
+   */
+  var Point = global.Point;
+
+  /**
+   * Represents a 2-dimentional rectangle.
+   * @class Rect
+   * @param {Number=} t
+   * @param {Number=} l
+   * @param {Number=} b
+   * @param {Number=} r
+   */
+  var Rect = function(t, l, b, r) {
+    this.tl = new Point(t, l);
+    this.br = new Point(b, r);
+  }
+
+  /*
+   * Property hook.
+   */
+  Rect.prototype.__propertyHook = function() {
+    return 'rect(' + this.tl.x + ',' + this.tl.y + ',' + this.br.x + ',' + this.br.y + ')';
+  }
+
+  /**
+   * Set values.
+   * @function set
+   * @memberof Rect
+   * @instance
+   * @param {Number} t
+   * @param {Number} l
+   * @param {Number} b
+   * @param {Number} r
+   * @returns {Rect}
+   */
+  Rect.prototype.set = function(t, l, b, r) {
+    this.tl.set(t, l);
+    this.br.set(b, r);
+    return this;
+  }
+
+  /**
+   * Copy values from another {@link Rect}.
+   * @function copy
+   * @memberof Rect
+   * @instance
+   * @param {Rect} r
+   * @returns {Rect}
+   */
+  Rect.prototype.copy = function(r) {
+    this.tl.copy(r.tl);
+    this.br.copy(r.br);
+    return this;
+  }
+
+  /**
+   * Set the left value.
+   * @function setLeft
+   * @memberof Rect
+   * @instance
+   * @param {Number} l
+   * @returns {Rect}
+   */
+  Rect.prototype.setLeft = function(l) {
+    this.tl.x = l;
+    return this;
+  }
+
+  /**
+   * Get the left value.
+   * @function getLeft
+   * @memberof Rect
+   * @instance
+   * @returns {Number} The left value.
+   */
+  Rect.prototype.getLeft = function() {
+    return this.tl.x;
+  }
+
+  /**
+   * Set the top value.
+   * @function setTop
+   * @memberof Rect
+   * @instance
+   * @param {Number} t
+   * @returns {Rect}
+   */
+  Rect.prototype.setTop = function(t) {
+    this.tl.y = t;
+    return this;
+  }
+
+  /**
+   * Get the top value.
+   * @function getTop
+   * @memberof Rect
+   * @instance
+   * @returns {Number} The top value.
+   */
+  Rect.prototype.getTop = function() {
+    return this.tl.y;
+  }
+
+  /**
+   * Set the right value.
+   * @function setRight
+   * @memberof Rect
+   * @instance
+   * @param {Number} r
+   * @returns {Rect}
+   */
+  Rect.prototype.setRight = function(r) {
+    this.br.x = r;
+    return this;
+  }
+
+  /**
+   * Get the right value.
+   * @function getRight
+   * @memberof Rect
+   * @instance
+   * @returns {Number} The right value.
+   */
+  Rect.prototype.getRight = function() {
+    return this.br.x;
+  }
+
+  /**
+   * Set the bottom value.
+   * @function setBottom
+   * @memberof Rect
+   * @instance
+   * @param {Number} b
+   * @returns {Rect}
+   */
+  Rect.prototype.setBottom = function(b) {
+    this.br.y = b;
+    return this;
+  }
+
+  /**
+   * Get the bottom value.
+   * @function getBottom
+   * @memberof Rect
+   * @instance
+   * @returns {Number} The bottom value.
+   */
+  Rect.prototype.getBottom = function() {
+    return this.br.y;
+  }
+
+  /**
+   * Set the width.
+   * @function setWidth
+   * @memberof Rect
+   * @instance
+   * @param {Number} w
+   * @returns {Rect}
+   */
+  Rect.prototype.setWidth = function(w) {
+    this.setRight(this.tl.x + w);
+    return this;
+  }
+
+  /**
+   * Get the width.
+   * @function getWidth
+   * @memberof Rect
+   * @instance
+   * @returns {Number} The width.
+   */
+  Rect.prototype.getWidth = function() {
+    return this.br.x - this.tl.x;
+  }
+
+  /**
+   * Set the height.
+   * @function setHeight
+   * @memberof Rect
+   * @instance
+   * @param {Number} h
+   * @returns {Rect}
+   */
+  Rect.prototype.setHeight = function(h) {
+    this.setBottom(this.tl.y + h);
+    return this;
+  }
+
+  /**
+   * Get the height.
+   * @function getHeight
+   * @memberof Rect
+   * @instance
+   * @returns {Number} The height.
+   */
+  Rect.prototype.getHeight = function() {
+    return this.br.y - this.tl.y;
+  }
+
+  /**
+   * Calculate the centroid.
+   * {@link http://en.wikipedia.org/wiki/Centroid}
+   * @function centroid
+   * @memberof Rect
+   * @instance
+   * @returns {Point} The centroid.
+   */
+  Rect.prototype.centroid = function() {
+    return new Point((this.tl.x + this.br.x) / 2, (this.tl.y + this.br.y) / 2);
+  }
+
+  /**
+   * Determines whether or not this {@link Rect} contains the provided {@link Rect}.
+   * @function contains
+   * @memberof Rect
+   * @instance
+   * @param {Rect} r
+   * @returns {Boolean} Whether or not this {@link Rect} contains the provided {@link Rect}.
+   */
+  Rect.prototype.contains = function(r) {
+    return r.tl.x >= this.tl.x &amp;&amp; r.tl.x &lt;= this.br.x &amp;&amp; r.tl.y >= this.tl.y &amp;&amp; r.tl.y &lt;= this.br.y;
+  }
+
+  /**
+   * Determines whether or not this {@link Rect} intersects the provided {@link Rect}.
+   * @function intersects
+   * @memberof Rect
+   * @instance
+   * @param {Rect} r
+   * @returns {Boolean} Whether or not this {@link Rect} intersects the provided {@link Rect}.
+   */
+  Rect.prototype.intersects = function(r) {
+    return !(r.tl.x > this.br.x || r.br.x &lt; this.tl.x || r.tl.y > this.br.y || r.br.y &lt; this.tl.y);
+  }
+
+  /**
+   * @function set
+   * @memberof Rect
+   * @static
+   * @see Rect#set
+   * @returns {Rect}
+   */
+  Rect.set = Util.makeDaisyChain(Rect, Rect.prototype.set);
+
+  /**
+   * @function copy 
+   * @memberof Rect
+   * @static
+   * @see Rect#copy
+   * @returns {Rect}
+   */
+  Rect.copy = Util.makeDaisyChain(Rect, Rect.prototype.copy);
+
+  /**
+   * @function setLeft 
+   * @memberof Rect
+   * @static
+   * @see Rect#setLeft
+   * @returns {Rect}
+   */
+  Rect.setLeft = Util.makeDaisyChain(Rect, Rect.prototype.setLeft);
+
+  /**
+   * @function setTop 
+   * @memberof Rect
+   * @static
+   * @see Rect#setTop
+   * @returns {Rect}
+   */
+  Rect.setTop = Util.makeDaisyChain(Rect, Rect.prototype.setTop);
+
+  /**
+   * @function setRight 
+   * @memberof Rect
+   * @static
+   * @see Rect#setRight
+   * @returns {Rect}
+   */
+  Rect.setRight = Util.makeDaisyChain(Rect, Rect.prototype.setRight);
+
+  /**
+   * @function setBottom 
+   * @memberof Rect
+   * @static
+   * @see Rect#setBottom
+   * @returns {Rect}
+   */
+  Rect.setBottom = Util.makeDaisyChain(Rect, Rect.prototype.setBottom);
+
+  /**
+   * @function setWidth 
+   * @memberof Rect
+   * @static
+   * @see Rect#setWidth
+   * @returns {Rect}
+   */
+  Rect.setWidth = Util.makeDaisyChain(Rect, Rect.prototype.setWidth);
+
+  /**
+   * @function setHeight 
+   * @memberof Rect
+   * @static
+   * @see Rect#setHeight
+   * @returns {Rect}
+   */
+  Rect.setHeight = Util.makeDaisyChain(Rect, Rect.prototype.setHeight);
+
+  /*
+   * Exports
+  */
+  global.Rect = Rect;
+})(window);
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Chain.html">Chain</a></li><li><a href="Color.html">Color</a></li><li><a href="Keyframes.html">Keyframes</a></li><li><a href="Point.html">Point</a></li><li><a href="Rect.html">Rect</a></li><li><a href="Transform.html">Transform</a></li><li><a href="Transition.html">Transition</a></li></ul><h3>Namespaces</h3><ul><li><a href="Exception.html">Exception</a></li><li><a href="Log.html">Log</a></li><li><a href="Log.Tags.html">Tags</a></li><li><a href="Math.html">Math</a></li><li><a href="Math.Ease.html">Ease</a></li><li><a href="Platform.html">Platform</a></li><li><a href="Property.html">Property</a></li><li><a href="Scheduler.html">Scheduler</a></li><li><a href="Time.html">Time</a></li><li><a href="Unit.html">Unit</a></li><li><a href="Util.html">Util</a></li><li><a href="Uuid.html">Uuid</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-beta3</a> on Fri May 08 2015 17:31:33 GMT-0400 (EDT)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
