@@ -1,2 +1,2 @@
 # Z
-Z is a
+Z is a game engine for HTML5.
