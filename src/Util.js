@@ -71,6 +71,51 @@
     }
   }
 
+  /**
+   * Inherit from a parent class.
+   * @function inherit
+   * @memberof Util
+   * @static
+   * @param {Object} parent
+   * @param {Object} child
+   */
+  Util.inherit = function(parent, child) {
+    child.prototype = Object.create(parent.prototype);
+    child.prototype.constructor = child;
+  }
+
+  /**
+   * Merge two objects.
+   * @function merge
+   * @memberof Util
+   * @static
+   * @param {Object} dest
+   * @param {Object} src
+   * @returns {Object} Returns dest.
+   */
+  Util.merge = function(dest, src) {
+    for (var k in src) {
+      if (src.hasOwnProperty(k)) {
+        dest[k] = src[k];
+      }
+    }
+
+    return dest;
+  }
+
+  /**
+   * Extend an object's prototype with the provided prototype.
+   * @function extend
+   * @memberof Util
+   * @static
+   * @param {Object} dest
+   * @param {Object} src
+   * @returns {Object} Returns dest.
+   */
+  Util.extend = function(dest, src) {
+    return Util.merge(dest.prototype, src);
+  }
+
   /*
    * Exports
    */

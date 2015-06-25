@@ -189,6 +189,8 @@
   */
   Unit.px = make.bind(null, 'px');
 
+  Unit.Zero = Unit.px(0);
+
   /*
    * Exports
    */

@@ -1,5 +1,5 @@
 /**
- * Animation.
+ * ImageAnimation.
  *
  * MIT License
  * Copyright (c) 2015 notrubp@gmail.com
@@ -21,12 +21,12 @@
  */
 (function(global) {
   /**
-   * Animation.
-   * @class Animation
+   * ImageAnimation.
+   * @class ImageAnimation
    */
-  var Animation = function() {
-    this.playback = Animation.Playback.Once;
-    this.direction = Animation.PlayDirection.Forward;
+  var ImageAnimation = function() {
+    this.playback = ImageAnimation.Playback.Once;
+    this.direction = ImageAnimation.PlayDirection.Forward;
 
     /*
      * Default 30 FPS.
@@ -36,12 +36,12 @@
 
   /**
    * Playback enumeration.
-   * @memberof Animation
+   * @memberof ImageAnimation
    * @readonly
    * @static
    * @enum {Number}
    */
-  Animation.Playback = {
+  ImageAnimation.Playback = {
     /**
      * Play frames 0 &#10140; N until stopped.
      */
@@ -58,16 +58,16 @@
     'OnceLoop' : 2
   }
 
-  Object.freeze(Animation.Playback);
+  Object.freeze(ImageAnimation.Playback);
 
   /**
    * Play direction enumeration.
-   * @memberof Animation
+   * @memberof ImageAnimation
    * @readonly
    * @static
    * @enum {Number}
    */
-  Animation.PlayDirection = {
+  ImageAnimation.PlayDirection = {
     /**
      * Play frames in ascending order 0 &#10140; N.
      */
@@ -79,171 +79,127 @@
     'Reverse' : 1
   }
 
-  Object.freeze(Animation.PlayDirection);
+  Object.freeze(ImageAnimation.PlayDirection);
 
   /**
    * Set the playback.
    * @function setPlayback
-   * @memberof Animation
+   * @memberof ImageAnimation
    * @instance
-   * @param {Animation.Playback} playback
+   * @param {ImageAnimation.Playback} playback
    */
-  Animation.prototype.setPlayback = function(playback) {
+  ImageAnimation.prototype.setPlayback = function(playback) {
     this.playback = playback;
   }
 
   /**
    * Get the playback.
    * @function getPlayback
-   * @memberof Animation
+   * @memberof ImageAnimation
    * @instance
-   * @returns {Animation.Playback}
+   * @returns {ImageAnimation.Playback}
    */
-  Animation.prototype.getPlayback = function() {
+  ImageAnimation.prototype.getPlayback = function() {
     return this.playback;
   }
 
   /**
    * Set the play direction.
    * @function setPlayDirection
-   * @memberof Animation
+   * @memberof ImageAnimation
    * @instance
-   * @param {Animation.PlayDirection} direction
+   * @param {ImageAnimation.PlayDirection} direction
    */
-  Animation.prototype.setPlayDirection = function(direction) {
+  ImageAnimation.prototype.setPlayDirection = function(direction) {
     this.direction = direction;
   }
 
   /**
    * Get the play direction.
    * @function getPlayDirection
-   * @memberof Animation
+   * @memberof ImageAnimation
    * @instance
-   * @returns {Animation.PlayDirection}
+   * @returns {ImageAnimation.PlayDirection}
    */
-  Animation.prototype.getPlayDirection = function() {
+  ImageAnimation.prototype.getPlayDirection = function() {
     return this.direction;
   }
 
   /**
    * Set frames per second.
    * @function setFps
-   * @memberof Animation
+   * @memberof ImageAnimation
    * @instance
    * @param {Number} fps
    */
-  Animation.prototype.setFps = function(fps) {
+  ImageAnimation.prototype.setFps = function(fps) {
     this.ms = 1.0 / fps * 1000.0;
   }
 
   /**
    * Get frames per second.
    * @function getFps
-   * @memberof Animation
+   * @memberof ImageAnimation
    * @instance
    * @returns {Number}
    */
-  Animation.prototype.getFps = function() {
+  ImageAnimation.prototype.getFps = function() {
     return 1.0 / this.ms * 1000.0;
   }
 
   /**
    * Get whether or not the animation is currently playing.
    * @function isPlaying
-   * @memberof Animation
+   * @memberof ImageAnimation
    * @instance
    * @returns {Boolean}
    */
-  Animation.prototype.isPlaying = function() {
-    return false;
-  }
-
-  /**
-   * Enabled or disable ensure image source feature. This is disabled by 
-   * default as an optimization and is used for when an animation has multiple
-   * types that reference different source images.
-   * @function setEnsureSrc
-   * @memberof Animation
-   * @instance
-   * @param {Boolean} ensureSrc
-   */
-  Animation.prototype.setEnsureSrc = function(ensureSrc) {
-  }
-
-  /**
-   * Get whether or not ensure image source feature is enabled or disabled.
-   * @function isEnsureSrc
-   * @memberof Animation
-   * @instance
-   * @returns {Boolean}
-   */
-  Animation.prototype.isEnsureSrc = function() {
-    return false;
-  }
-
-  /**
-   * Enable or disable CSS3 features, if any.
-   * @function setCss3Enabled
-   * @memberof Animation
-   * @instance
-   * @param {Boolean} css3enabled
-   */
-  Animation.prototype.setCss3Enabled = function(css3enabled) {
-  }
-
-  /**
-   * Get whether or not CSS3 features are enabled.
-   * @function isCss3Enabled
-   * @memberof Animation
-   * @instance
-   * @returns {Boolean}
-   */
-  Animation.prototype.isCss3Enabled = function() {
+  ImageAnimation.prototype.isPlaying = function() {
     return false;
   }
 
   /**
    * Play the animation.
    * @function play
-   * @memberof Animation
+   * @memberof ImageAnimation
    * @instance
    */
-  Animation.prototype.play = function() {
+  ImageAnimation.prototype.play = function() {
     this.playAt(0);
   }
 
   /**
    * Play the animation at a specific frame.
    * @function playAt
-   * @memberof Animation
+   * @memberof ImageAnimation
    * @instance
    * @param {Number} frame
    */
-  Animation.prototype.playAt = function(frame) {
+  ImageAnimation.prototype.playAt = function(frame) {
   }
 
   /**
    * Stop the animation.
    * @function stop
-   * @memberof Animation
+   * @memberof ImageAnimation
    * @instance
    */
-  Animation.prototype.stop = function() {
+  ImageAnimation.prototype.stop = function() {
     this.stopAt(0);
   }
 
   /**
    * Stop the animation at a specific frame.
    * @function stopAt
-   * @memberof Animation
+   * @memberof ImageAnimation
    * @instance
    * @param {Number} frame
    */
-  Animation.prototype.stopAt = function(frame) {
+  ImageAnimation.prototype.stopAt = function(frame) {
   }
 
   /*
    * Exports
    */
-  global.Animation = Animation;
+  global.ImageAnimation = ImageAnimation;
 })(window);

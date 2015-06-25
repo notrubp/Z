@@ -141,23 +141,23 @@
 
   Log.info('test', '--------------------');
 
-  var div = document.createElement('div');
+  var rect = Dom.createRect();
 
-  Property.hook(div, function(element, property, value) {
+  Property.hook(rect, function(element, property, value) {
     Log.info('test', 'hook1 -> ' + element + ', ' + property + ', ' + value);
     return 1;
   });
 
-  Property.hook(div, function(element, property, value) {
+  Property.hook(rect, function(element, property, value) {
     Log.info('test', 'hook2 -> ' + element + ', ' + property + ', ' + value);
     return property == 'right';
   });
 
-  Property.set(div, 'left', Unit.px(0));
-  Property.set(div, 'right', '0px');
+  Property.set(rect, 'left', Unit.Zero);
+  Property.set(rect, 'right', '0px');
 
-  Log.info('test', Property.get(div, 'left'));
-  Log.info('test', Property.get(div, 'right'));
+  Log.info('test', Property.get(rect, 'left'));
+  Log.info('test', Property.get(rect, 'right'));
 
   Log.info('test', '--------------------');
 
@@ -167,39 +167,34 @@
 
   Log.info('test', '--------------------');
 
-  document.addEventListener('DOMContentLoaded', function() {
-    function rect(x, y, w, h, d) {
-      var div = document.createElement('div');
-      Property.set(div, 'position', 'absolute');
-      Property.set(div, 'width', Unit.px(w));
-      Property.set(div, 'height', Unit.px(h));
-
-      var c = Color.randomRgb();
-      Property.set(div, 'background-color', c);
+  Dom.listen(document, 'DOMContentLoaded', function() {
+    function makeRect(x, y, w, h, d) {
+      var rect = Dom.createRect(Rect.makeXywh(x, y, w, h), 
+        Transform.Origin, 
+        Color.randomRgb());
 
       function animate() {
-        Property.remove(div, 'transition');
+        Property.remove(rect, 'transition');
 
         var start = Transform.translate(Unit.px(x), Unit.px(y)).rotate(0);
-        Property.set(div, 'transform', start);
+        Property.set(rect, 'transform', start);
 
         var transition = Transition.set('transform', 5, 'linear')
           .set('background-color', 5, 'linear');
 
-        Property.set(div, 'transition', transition, 0, true);
+        Property.set(rect, 'transition', transition, 0, true);
 
         var end = Transform.translate(Unit.px(x), Unit.px(y)).rotate((d ? 1 : -1) * Math.PI * 2 * 2);
-        Property.set(div, 'transform', end, 0);
+        Property.set(rect, 'transform', end, 0);
 
-        c = Color.randomRgb();
-        Property.set(div, 'background-color', c);
+        Property.set(rect, 'background-color', Color.randomRgb(), 0);
       }
 
-      div.addEventListener('transitionend', animate);
+      Dom.listen(rect, 'transitionend', animate);
 
       animate();
 
-      document.body.appendChild(div);
+      Dom.append(document.body, rect);
     }
 
     var d = true;
@@ -210,12 +205,12 @@
       var y = n / i / 2;
       var w = n / i;
       var h = n / i;
-      rect(x, x, w, h, d = !d);
+      makeRect(x, x, w, h, d = !d);
     }
-  }, false);
+  });
 
-  document.addEventListener('DOMContentLoaded', function() {
-    function rect(delay) {
+  Dom.listen(document, 'DOMContentLoaded', function() {
+    function makeRect(delay) {
       var x = 1000;
       var y = 250;
 
@@ -229,61 +224,114 @@
         .inject()
         .getName();
 
-      var div = document.createElement('div');
-      Property.set(div, 'position', 'absolute');
-      Property.set(div, 'width', Unit.px(100));
-      Property.set(div, 'height', Unit.px(100));
-      Property.set(div, 'background-color', Color.randomRgb());
-      Property.set(div, 'animation-name', name);
-      Property.set(div, 'animation-duration', '1s');
-      Property.set(div, 'animation-delay', delay + 's');
-      Property.set(div, 'animation-fill-mode', 'both');
-      Property.set(div, 'animation-iteration-count', 'infinite');
+      var rect = Dom.createRect(Rect.makeXywh(0, 0, 100, 100),
+        Transform.Origin,
+        Color.randomRgb());
+
+      Property.set(rect, 'animation-name', name);
+      Property.set(rect, 'animation-duration', '10s');
+      Property.set(rect, 'animation-delay', delay + 's');
+      Property.set(rect, 'animation-fill-mode', 'both');
+      Property.set(rect, 'animation-iteration-count', 'infinite');
       
-      document.body.appendChild(div);
+      Dom.append(document.body, rect);
     }
 
     for (var i = 0; i < 4; ++i) {
-      rect(i / 4);
+      makeRect(i / 4 * 10);
     }
-  }, false);
+  });
 
   Log.info('test', '--------------------');
 
-  var div = document.createElement('div');
-  Property.set(div, 'left', '0px');
+  var rect = Dom.createRect();
+  Property.set(rect, 'left', '0px');
 
-  Log.info('test', Property.get(div, 'left'));
+  Log.info('test', Property.get(rect, 'left'));
 
-  Property.enqueue(div, function() {
-    Log.info('test', Property.get(div, 'left'));
+  Property.enqueue(rect, function() {
+    Log.info('test', Property.get(rect, 'left'));
   }, 0, true);
 
-  Property.set(div, 'left', '1px', 0);
+  Property.set(rect, 'left', '1px', 0);
 
-  Property.enqueue(div, function() {
-    Log.info('test', Property.get(div, 'left'));
+  Property.enqueue(rect, function() {
+    Log.info('test', Property.get(rect, 'left'));
   });
 
-  Property.enqueue(div, function() {
+  Property.enqueue(rect, function() {
     Log.info('test', '1002');
   }, 1002);
 
-  Property.enqueue(div, function() {
+  Property.enqueue(rect, function() {
     Log.info('test', '0');
   }, 0);
 
-  Property.enqueue(div, function() {
+  Property.enqueue(rect, function() {
     Log.info('test', '1000');
   }, 1000);
 
-  Property.enqueue(div, function() {
+  Property.enqueue(rect, function() {
     Log.info('test', '1001');
   }, 1001);
 
-  Property.enqueue(div, function() {
+  Property.enqueue(rect, function() {
     Log.info('test', '1003');
   }, 1003);
 
-  Property.set(div, 'left', '2px', 0);
+  Property.set(rect, 'left', '2px', 0);
+
+  Log.info('test', '--------------------');
+
+  var anim = new ImageAnimationCss3MaskedRect();
+  anim.setEnsureSrc(true);
+  anim.setPlayback(ImageAnimation.Playback.Loop);
+
+  anim.defs.add({
+    name : 'ship',
+    playback : 'loop',
+    fps : 24,
+    src : {
+      url : 'ship.png',
+      width : 119, 
+      height : 2142,
+    },
+    frames : [
+      { width : 119, height : 119, x : 0, y : 0 },
+      { width : 119, height : 119, x : 0, y : 119 },
+      { width : 119, height : 119, x : 0, y : 238 },
+      { width : 119, height : 119, x : 0, y : 357 },
+      { width : 119, height : 119, x : 0, y : 476 },
+      { width : 119, height : 119, x : 0, y : 595 },
+      { width : 119, height : 119, x : 0, y : 714 },
+      { width : 119, height : 119, x : 0, y : 833 },
+      { width : 119, height : 119, x : 0, y : 952 },
+      { width : 119, height : 119, x : 0, y : 1071 },
+      { width : 119, height : 119, x : 0, y : 1190 },
+      { width : 119, height : 119, x : 0, y : 1309 },
+      { width : 119, height : 119, x : 0, y : 1428 },
+      { width : 119, height : 119, x : 0, y : 1547 },
+      { width : 119, height : 119, x : 0, y : 1666 },
+      { width : 119, height : 119, x : 0, y : 1785 },
+      { width : 119, height : 119, x : 0, y : 1904 },
+      { width : 119, height : 119, x : 0, y : 2023 },
+      { width : 119, height : 119, x : 0, y : 0 },
+      { width : 119, height : 119, x : 0, y : 0 },
+      { width : 119, height : 119, x : 0, y : 0 },
+      { width : 119, height : 119, x : 0, y : 0 },
+      { width : 119, height : 119, x : 0, y : 0 },
+      { width : 119, height : 119, x : 0, y : 0 },
+      { width : 119, height : 119, x : 0, y : 0 },
+      { width : 119, height : 119, x : 0, y : 0 },
+      { width : 119, height : 119, x : 0, y : 0 },
+      { width : 119, height : 119, x : 0, y : 0 }
+    ]
+  });
+
+  anim.defs.select('ship');
+
+  Dom.listen(document, 'DOMContentLoaded', function() {
+    Dom.append(document.body, anim.mask);
+    anim.play();
+  });
 })();

@@ -170,6 +170,11 @@
       .reduce(generate.bind(null, this.keyframes), rulename + ' ' + this.name + ' {') + '}';
   }
 
+  /*
+   * Remember injected animations by name.
+   */
+  var injected = [];
+
   /**
    * Inject CSS into the document.
    * @function inject
@@ -182,6 +187,11 @@
     style.language = 'text/css';
     style.appendChild(document.createTextNode(this.generate()));
     document.getElementsByTagName('head')[0].appendChild(style);
+
+    if (Keyframes.isNotInjected(this.name)) {
+      injected.push(this.name);
+    }
+
     return this;
   }
 
@@ -230,6 +240,18 @@
    * @returns {Keyframes}
    */
   Keyframes.clear = Util.makeDaisyChain(Keyframes, Keyframes.prototype.clear);
+
+  /**
+   * Check whether the keyframes by name have already been injected.
+   * @function isNotInjected
+   * @memberof Keyframes
+   * @static
+   * @param {String} name
+   * @returns {Boolean} Whether or not the keyframes by name have already been injected.
+   */
+  Keyframes.isNotInjected = function(name) {
+    return injected.indexOf(name) == -1;
+  }
 
   /*
    * Exports

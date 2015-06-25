@@ -497,13 +497,13 @@
   }
 
   /**
-   * Wipes all pending entries for the provided element from the queue.
-   * @function wipe
+   * Clears all pending entries for the provided element from the queue.
+   * @function clear
    * @memberof Property
    * @static
    * @param {Object} element
    */
-  Property.wipe = function(element) {
+  Property.clear = function(element) {
     ensureUid(element);
     queue = ensureQueue(element);
     queue.splice(0, queue.length);

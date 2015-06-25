@@ -328,6 +328,36 @@
    */
   Rect.setHeight = Util.makeDaisyChain(Rect, Rect.prototype.setHeight);
 
+  /**
+   * Create a rect.
+   * * @function make
+   * @memberof Rect
+   * @static
+   * @param {Number} l
+   * @param {Number} t
+   * @param {Number} r
+   * @param {Number} b
+   * @returns {Rect}
+   */
+  Rect.make = function(l, t, r, b) {
+    return new Rect(l, t, r, b);
+  }
+
+  /**
+   * Create a rect from a coordinate (x, y) and size (width, height).
+   * @function makeXywh
+   * @memberof Rect
+   * @static
+   * @param {Number} x
+   * @param {Number} y
+   * @param {Number} w
+   * @param {Number} h
+   * @returns {Rect}
+   */
+  Rect.makeXywh = function(x, y, w, h) {
+    return new Rect(x, y, x + w, y + h);
+  }
+
   /*
    * Exports
   */

@@ -274,6 +274,54 @@
    * @returns {Color}
    */
   Color.setAlpha = Util.makeDaisyChain(Color, Color.prototype.setAlpha);
+
+  /**
+   * Transparent color.
+   * @constant {Color} Transparent
+   * @memberof Color
+   * @static
+   */
+  Color.Transparent = Color.rgba(0, 0, 0, 0);
+
+  /**
+   * Black color.
+   * @constant {Color} Black
+   * @memberof Color
+   * @static
+   */
+  Color.Black = Color.rgb(0, 0, 0);
+
+  /**
+   * White color.
+   * @constant {Color} White
+   * @memberof Color
+   * @static
+   */
+  Color.White = Color.rgb(1, 1, 1);
+
+  /**
+   * Red color.
+   * @constant {Color} Red
+   * @memberof Color
+   * @static
+   */
+  Color.Red = Color.rgb(1, 0, 0);
+
+  /**
+   * Green color.
+   * @constant {Color} Green
+   * @memberof Color
+   * @static
+   */
+  Color.Green = Color.rgb(0, 1, 0);
+
+  /**
+   * Blue color.
+   * @constant {Color} Blue
+   * @memberof Color
+   * @static
+   */
+  Color.Blue = Color.rgb(0, 0, 1);
   
   /*
    * Exports

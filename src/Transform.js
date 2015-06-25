@@ -25,6 +25,7 @@
    * Imports
    */
   var Util = global.Util;
+  var Unit = global.Unit;
 
   function fixup(_this) {
     if (_this.css === 'none') {
@@ -53,6 +54,25 @@
    */
   Transform.prototype.__propertyHook = function() {
     return this.css;
+  }
+
+  /*
+   * Java style equals()
+   */
+  Transform.prototype.equals = function(that) {
+    if (that == null) {
+      return false;
+    }
+
+    if (this === that) {
+      return true;
+    }
+
+    if (that instanceof Transform) {
+      return this.css === that.css;
+    }
+
+    return false;
   }
   
   /**
@@ -564,6 +584,14 @@
    * @returns {Transform}
    */
   Transform.skewY = Util.makeDaisyChain(Transform, Transform.prototype.skewY);
+
+  /**
+   * Origin (0, 0).
+   * @constant {Transform} Origin
+   * @memberof Transform
+   * @static
+   */
+  Transform.Origin = Transform.translate('0px', '0px');
 
   /*
    * Exports
