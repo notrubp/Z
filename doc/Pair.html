@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Namespace: Scheduler</title>
+    <title>JSDoc: Class: Pair</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Namespace: Scheduler</h1>
+    <h1 class="page-title">Class: Pair</h1>
 
     
 
@@ -29,7 +29,7 @@
 <header>
     
         <h2>
-        Scheduler
+        Pair
         </h2>
         
     
@@ -39,10 +39,101 @@
     <div class="container-overview">
     
         
-            <div class="description">Scheduling utility.</div>
+
+    
+
+    <h4 class="name" id="Pair"><span class="type-signature"></span>new Pair<span class="signature">(first, second)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+<div class="description">
+    Pair.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
         
 
         
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>first</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">*</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>second</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">*</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
 
 
 <dl class="details">
@@ -74,7 +165,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Scheduler.js.html">Scheduler.js</a>, <a href="Scheduler.js.html#line23">line 23</a>
+        <a href="Pair.js.html">Pair.js</a>, <a href="Pair.js.html#line23">line 23</a>
     </li></ul></dd>
     
 
@@ -86,7 +177,20 @@
 </dl>
 
 
-        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     
     </div>
 
@@ -110,14 +214,14 @@
 
     
 
-    <h4 class="name" id=".deferred"><span class="type-signature">(static) </span>deferred<span class="signature">(callback)</span><span class="type-signature"> &rarr; {Number}</span></h4>
+    <h4 class="name" id=".make"><span class="type-signature">(static) </span>make<span class="signature">(first, second)</span><span class="type-signature"> &rarr; {<a href="Pair.html">Pair</a>}</span></h4>
 
     
 
 
 
 <div class="description">
-    Schedule a callback for later in the event loop.
+    Make a new pair.
 </div>
 
 
@@ -153,13 +257,36 @@
 
         <tr>
             
-                <td class="name"><code>callback</code></td>
+                <td class="name"><code>first</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">function</span>
+<span class="param-type">*</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>second</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">*</span>
 
 
             
@@ -210,7 +337,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Scheduler.js.html">Scheduler.js</a>, <a href="Scheduler.js.html#line29">line 29</a>
+        <a href="Pair.js.html">Pair.js</a>, <a href="Pair.js.html#line34">line 34</a>
     </li></ul></dd>
     
 
@@ -236,10 +363,6 @@
 <h5>Returns:</h5>
 
         
-<div class="param-desc">
-    A setTimeout id.
-</div>
-
 
 
 <dl>
@@ -248,7 +371,7 @@
     </dt>
     <dd>
         
-<span class="param-type">Number</span>
+<span class="param-type"><a href="Pair.html">Pair</a></span>
 
 
     </dd>
@@ -263,14 +386,14 @@
 
     
 
-    <h4 class="name" id=".deferred"><span class="type-signature">(static) </span>deferred<span class="signature">(callback)</span><span class="type-signature"> &rarr; {Number}</span></h4>
+    <h4 class="name" id=".make"><span class="type-signature">(static) </span>make<span class="signature">(first, second)</span><span class="type-signature"> &rarr; {<a href="Pair.html">Pair</a>}</span></h4>
 
     
 
 
 
 <div class="description">
-    Schedule a callback for later in the event loop.
+    Make a new pair.
 </div>
 
 
@@ -306,13 +429,36 @@
 
         <tr>
             
-                <td class="name"><code>callback</code></td>
+                <td class="name"><code>first</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">function</span>
+<span class="param-type">*</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>second</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">*</span>
 
 
             
@@ -363,7 +509,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Scheduler.js.html">Scheduler.js</a>, <a href="Scheduler.js.html#line29">line 29</a>
+        <a href="Pair.js.html">Pair.js</a>, <a href="Pair.js.html#line34">line 34</a>
     </li></ul></dd>
     
 
@@ -389,10 +535,6 @@
 <h5>Returns:</h5>
 
         
-<div class="param-desc">
-    A setTimeout id.
-</div>
-
 
 
 <dl>
@@ -401,317 +543,7 @@
     </dt>
     <dd>
         
-<span class="param-type">Number</span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-        
-            
-
-    
-
-    <h4 class="name" id=".raf"><span class="type-signature">(static) </span>raf<span class="signature">(callback)</span><span class="type-signature"> &rarr; {Number}</span></h4>
-
-    
-
-
-
-<div class="description">
-    Schedule a callback for the next animation frame.
-<br>
-<a href="https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame">https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame</a>
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>callback</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">function</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Scheduler.js.html">Scheduler.js</a>, <a href="Scheduler.js.html#line77">line 77</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    A requestAnimationFrame id.
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">Number</span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-        
-            
-
-    
-
-    <h4 class="name" id=".raf"><span class="type-signature">(static) </span>raf<span class="signature">(callback)</span><span class="type-signature"> &rarr; {Number}</span></h4>
-
-    
-
-
-
-<div class="description">
-    Schedule a callback for the next animation frame.
-<br>
-<a href="https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame">https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame</a>
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>callback</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">function</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Scheduler.js.html">Scheduler.js</a>, <a href="Scheduler.js.html#line77">line 77</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    A requestAnimationFrame id.
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">Number</span>
+<span class="param-type"><a href="Pair.html">Pair</a></span>
 
 
     </dd>
@@ -742,7 +574,7 @@
 <header>
     
         <h2>
-        Scheduler
+        Pair
         </h2>
         
     
@@ -752,10 +584,101 @@
     <div class="container-overview">
     
         
-            <div class="description">Scheduling utility.</div>
+
+    
+
+    <h4 class="name" id="Pair"><span class="type-signature"></span>new Pair<span class="signature">(first, second)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+<div class="description">
+    Pair.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
         
 
         
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>first</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">*</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>second</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">*</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
 
 
 <dl class="details">
@@ -787,7 +710,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Scheduler.js.html">Scheduler.js</a>, <a href="Scheduler.js.html#line23">line 23</a>
+        <a href="Pair.js.html">Pair.js</a>, <a href="Pair.js.html#line23">line 23</a>
     </li></ul></dd>
     
 
@@ -799,7 +722,20 @@
 </dl>
 
 
-        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     
     </div>
 
@@ -823,14 +759,14 @@
 
     
 
-    <h4 class="name" id=".deferred"><span class="type-signature">(static) </span>deferred<span class="signature">(callback)</span><span class="type-signature"> &rarr; {Number}</span></h4>
+    <h4 class="name" id=".make"><span class="type-signature">(static) </span>make<span class="signature">(first, second)</span><span class="type-signature"> &rarr; {<a href="Pair.html">Pair</a>}</span></h4>
 
     
 
 
 
 <div class="description">
-    Schedule a callback for later in the event loop.
+    Make a new pair.
 </div>
 
 
@@ -866,13 +802,36 @@
 
         <tr>
             
-                <td class="name"><code>callback</code></td>
+                <td class="name"><code>first</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">function</span>
+<span class="param-type">*</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>second</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">*</span>
 
 
             
@@ -923,7 +882,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Scheduler.js.html">Scheduler.js</a>, <a href="Scheduler.js.html#line29">line 29</a>
+        <a href="Pair.js.html">Pair.js</a>, <a href="Pair.js.html#line34">line 34</a>
     </li></ul></dd>
     
 
@@ -949,10 +908,6 @@
 <h5>Returns:</h5>
 
         
-<div class="param-desc">
-    A setTimeout id.
-</div>
-
 
 
 <dl>
@@ -961,7 +916,7 @@
     </dt>
     <dd>
         
-<span class="param-type">Number</span>
+<span class="param-type"><a href="Pair.html">Pair</a></span>
 
 
     </dd>
@@ -976,14 +931,14 @@
 
     
 
-    <h4 class="name" id=".deferred"><span class="type-signature">(static) </span>deferred<span class="signature">(callback)</span><span class="type-signature"> &rarr; {Number}</span></h4>
+    <h4 class="name" id=".make"><span class="type-signature">(static) </span>make<span class="signature">(first, second)</span><span class="type-signature"> &rarr; {<a href="Pair.html">Pair</a>}</span></h4>
 
     
 
 
 
 <div class="description">
-    Schedule a callback for later in the event loop.
+    Make a new pair.
 </div>
 
 
@@ -1019,13 +974,36 @@
 
         <tr>
             
-                <td class="name"><code>callback</code></td>
+                <td class="name"><code>first</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">function</span>
+<span class="param-type">*</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>second</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">*</span>
 
 
             
@@ -1076,7 +1054,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Scheduler.js.html">Scheduler.js</a>, <a href="Scheduler.js.html#line29">line 29</a>
+        <a href="Pair.js.html">Pair.js</a>, <a href="Pair.js.html#line34">line 34</a>
     </li></ul></dd>
     
 
@@ -1102,10 +1080,6 @@
 <h5>Returns:</h5>
 
         
-<div class="param-desc">
-    A setTimeout id.
-</div>
-
 
 
 <dl>
@@ -1114,317 +1088,7 @@
     </dt>
     <dd>
         
-<span class="param-type">Number</span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-        
-            
-
-    
-
-    <h4 class="name" id=".raf"><span class="type-signature">(static) </span>raf<span class="signature">(callback)</span><span class="type-signature"> &rarr; {Number}</span></h4>
-
-    
-
-
-
-<div class="description">
-    Schedule a callback for the next animation frame.
-<br>
-<a href="https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame">https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame</a>
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>callback</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">function</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Scheduler.js.html">Scheduler.js</a>, <a href="Scheduler.js.html#line77">line 77</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    A requestAnimationFrame id.
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">Number</span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-        
-            
-
-    
-
-    <h4 class="name" id=".raf"><span class="type-signature">(static) </span>raf<span class="signature">(callback)</span><span class="type-signature"> &rarr; {Number}</span></h4>
-
-    
-
-
-
-<div class="description">
-    Schedule a callback for the next animation frame.
-<br>
-<a href="https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame">https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame</a>
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>callback</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">function</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Scheduler.js.html">Scheduler.js</a>, <a href="Scheduler.js.html#line77">line 77</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    A requestAnimationFrame id.
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">Number</span>
+<span class="param-type"><a href="Pair.html">Pair</a></span>
 
 
     </dd>

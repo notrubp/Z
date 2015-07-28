@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: Uuid.js</title>
+    <title>JSDoc: Source: Steps.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: Uuid.js</h1>
+    <h1 class="page-title">Source: Steps.js</h1>
 
     
 
@@ -27,7 +27,7 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>/**
- * Universially unique identifier utility.
+ * CSS steps generator.
  *
  * MIT License
  * Copyright (c) 2015 notrubp@gmail.com
@@ -48,64 +48,52 @@
  * @copyright notrubp@gmail.com 2015
  */
 (function(global) {
+  /**
+   * CSS steps generator.
+   * @class Steps
+   */
+  var Steps = function(numberOfSteps, direction) {
+    this.css = 'steps(' + numberOfSteps + ',' + (Steps.Direction.Start === direction ? 'start' : 'end') + ')';
+  }
+
   /*
-   * Imports
+   * Property hook.
    */
-  var Random = global.Random;
-
-  /**
-   * Universially unique identifier utility.
-   * @namespace Uuid
-  */
-  var Uuid = {};
-
-  var chars = '0123456789abcdef';
-
-  function rfc4122Replacer(match, offset, string) {
-    var j = Random.range(chars.length);
-    return chars[offset == 19 ? (j &amp; 0x3) | 0x8 : j &amp; 0xf];
+  Steps.prototype.__propertyHook = function() {
+    return this.css;
   }
 
   /**
-   * @description Generate a RFC4122 Version 4 UUID.
-   * &lt;br>
-   * {@link https://www.ietf.org/rfc/rfc4122.txt}
-   * @function rfc4122
-   * @memberof Uuid
+   * Make a new steps.
+   * @function make
+   * @memberof Steps
    * @static
-   * @returns {String}
-  */
-  Uuid.rfc4122 = function() {
-    return '00000000-0000-4000-0000-000000000000'.replace(/0/g, rfc4122Replacer);
-  }
-
-  var letters = 'abcdefghijklmnopqrstuvwxyz';
-
-  /**
-   * Generate a random string of letters.
-   * @function letters
-   * @memberof Uuid
-   * @static
-   * @param {Number} [length=36] - Length of the string.
-   * @returns {String}
+   * @param {Number} numberOfSteps
+   * @param {Steps.Direction} direction
+   * @returns {Steps}
    */
-  Uuid.letters = function(length) {
-    length = length || 36;
-
-    var out = '';
-
-    for (var i = 0; i &lt; length; ++i) {
-      var j = Random.range(letters.length);
-      out += letters[j];
-    }
-
-    return out;
+  Steps.make = function(numberOfSteps, direction) {
+    return new Steps(numberOfSteps, direction || Steps.Direction.End);
   }
+
+  /**
+   * Direction enumeration.
+   * @memberof Steps
+   * @readonly
+   * @static
+   * @enum {Number}
+   */
+  Steps.Direction = {
+    Start : 0,
+    End : 1
+  }
+
+  Object.freeze(Steps.Direction);
 
   /*
    * Exports
    */
-  global.Uuid = Uuid;
+  global.Steps = Steps;
 })(window);
 </code></pre>
         </article>

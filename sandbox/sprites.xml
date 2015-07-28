@@ -1,0 +1,8 @@
+<TextureAtlas imagePath=sprites.png>
+	<SubTexture name=alert_red_strip.png x=0 y=197 width=129 height=20/>
+	<SubTexture name=alert_yellow_strip.png x=0 y=174 width=130 height=23/>
+	<SubTexture name=btn_backtolobby_no_strip.png x=0 y=139 width=204 height=35/>
+	<SubTexture name=btn_backtolobby_yes_strip.png x=0 y=104 width=204 height=35/>
+	<SubTexture name=btn_cancel_strip.png x=0 y=0 width=543 height=49/>
+	<SubTexture name=btn_ok_strip.png x=0 y=49 width=381 height=55/>
+</TextureAtlas>

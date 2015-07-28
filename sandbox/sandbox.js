@@ -283,9 +283,9 @@
 
   Log.info('test', '--------------------');
 
-  var anim = new ImageAnimationCss3MaskedRect();
+  var anim = new SpriteAnimationCss();
   anim.setEnsureSrc(true);
-  anim.setPlayback(ImageAnimation.Playback.Loop);
+  anim.setPlayback(SpriteAnimation.Playback.Loop);
 
   anim.defs.add({
     name : 'ship',
@@ -331,7 +331,24 @@
   anim.defs.select('ship');
 
   Dom.listen(document, 'DOMContentLoaded', function() {
-    Dom.append(document.body, anim.mask);
+    Dom.append(document.body, anim.sprite.mask);
     anim.play();
+  });
+
+  var sheet = new SpriteSheet('sprites.png', {
+    alert_red : { x : 0, y : 197, width : 129, height : 20 },
+    alert_yellow : { x : 0, y : 174, width : 130, height : 23 },
+    btn_backtolobby_no : { x : 0, y : 139, width : 204, height : 35 },
+    btn_backtolobby_yes : { x : 0, y : 104, width : 204, height : 35 },
+    btn_cancel : { x : 0, y : 0, width : 543, height : 49 },
+    btn_ok : { x : 0, y : 49, width : 381, height : 55 }
+  });
+
+  var sprite = sheet.get('btn_ok');
+
+  Dom.listen(document, 'DOMContentLoaded', function() {
+    var img = Dom.createImage();
+
+    Dom.append(document.body, img);
   });
 })();

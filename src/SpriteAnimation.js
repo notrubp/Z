@@ -1,5 +1,5 @@
 /**
- * ImageAnimation.
+ * SpriteAnimation.
  *
  * MIT License
  * Copyright (c) 2015 notrubp@gmail.com
@@ -21,12 +21,12 @@
  */
 (function(global) {
   /**
-   * ImageAnimation.
-   * @class ImageAnimation
+   * SpriteAnimation.
+   * @class SpriteAnimation
    */
-  var ImageAnimation = function() {
-    this.playback = ImageAnimation.Playback.Once;
-    this.direction = ImageAnimation.PlayDirection.Forward;
+  var SpriteAnimation = function() {
+    this.playback = SpriteAnimation.Playback.Once;
+    this.direction = SpriteAnimation.PlayDirection.Forward;
 
     /*
      * Default 30 FPS.
@@ -36,12 +36,12 @@
 
   /**
    * Playback enumeration.
-   * @memberof ImageAnimation
+   * @memberof SpriteAnimation
    * @readonly
    * @static
    * @enum {Number}
    */
-  ImageAnimation.Playback = {
+  SpriteAnimation.Playback = {
     /**
      * Play frames 0 &#10140; N until stopped.
      */
@@ -58,16 +58,16 @@
     'OnceLoop' : 2
   }
 
-  Object.freeze(ImageAnimation.Playback);
+  Object.freeze(SpriteAnimation.Playback);
 
   /**
    * Play direction enumeration.
-   * @memberof ImageAnimation
+   * @memberof SpriteAnimation
    * @readonly
    * @static
    * @enum {Number}
    */
-  ImageAnimation.PlayDirection = {
+  SpriteAnimation.PlayDirection = {
     /**
      * Play frames in ascending order 0 &#10140; N.
      */
@@ -79,127 +79,127 @@
     'Reverse' : 1
   }
 
-  Object.freeze(ImageAnimation.PlayDirection);
+  Object.freeze(SpriteAnimation.PlayDirection);
 
   /**
    * Set the playback.
    * @function setPlayback
-   * @memberof ImageAnimation
+   * @memberof SpriteAnimation
    * @instance
-   * @param {ImageAnimation.Playback} playback
+   * @param {SpriteAnimation.Playback} playback
    */
-  ImageAnimation.prototype.setPlayback = function(playback) {
+  SpriteAnimation.prototype.setPlayback = function(playback) {
     this.playback = playback;
   }
 
   /**
    * Get the playback.
    * @function getPlayback
-   * @memberof ImageAnimation
+   * @memberof SpriteAnimation
    * @instance
-   * @returns {ImageAnimation.Playback}
+   * @returns {SpriteAnimation.Playback}
    */
-  ImageAnimation.prototype.getPlayback = function() {
+  SpriteAnimation.prototype.getPlayback = function() {
     return this.playback;
   }
 
   /**
    * Set the play direction.
    * @function setPlayDirection
-   * @memberof ImageAnimation
+   * @memberof SpriteAnimation
    * @instance
-   * @param {ImageAnimation.PlayDirection} direction
+   * @param {SpriteAnimation.PlayDirection} direction
    */
-  ImageAnimation.prototype.setPlayDirection = function(direction) {
+  SpriteAnimation.prototype.setPlayDirection = function(direction) {
     this.direction = direction;
   }
 
   /**
    * Get the play direction.
    * @function getPlayDirection
-   * @memberof ImageAnimation
+   * @memberof SpriteAnimation
    * @instance
-   * @returns {ImageAnimation.PlayDirection}
+   * @returns {SpriteAnimation.PlayDirection}
    */
-  ImageAnimation.prototype.getPlayDirection = function() {
+  SpriteAnimation.prototype.getPlayDirection = function() {
     return this.direction;
   }
 
   /**
    * Set frames per second.
    * @function setFps
-   * @memberof ImageAnimation
+   * @memberof SpriteAnimation
    * @instance
    * @param {Number} fps
    */
-  ImageAnimation.prototype.setFps = function(fps) {
+  SpriteAnimation.prototype.setFps = function(fps) {
     this.ms = 1.0 / fps * 1000.0;
   }
 
   /**
    * Get frames per second.
    * @function getFps
-   * @memberof ImageAnimation
+   * @memberof SpriteAnimation
    * @instance
    * @returns {Number}
    */
-  ImageAnimation.prototype.getFps = function() {
+  SpriteAnimation.prototype.getFps = function() {
     return 1.0 / this.ms * 1000.0;
   }
 
   /**
    * Get whether or not the animation is currently playing.
    * @function isPlaying
-   * @memberof ImageAnimation
+   * @memberof SpriteAnimation
    * @instance
    * @returns {Boolean}
    */
-  ImageAnimation.prototype.isPlaying = function() {
+  SpriteAnimation.prototype.isPlaying = function() {
     return false;
   }
 
   /**
    * Play the animation.
    * @function play
-   * @memberof ImageAnimation
+   * @memberof SpriteAnimation
    * @instance
    */
-  ImageAnimation.prototype.play = function() {
+  SpriteAnimation.prototype.play = function() {
     this.playAt(0);
   }
 
   /**
    * Play the animation at a specific frame.
    * @function playAt
-   * @memberof ImageAnimation
+   * @memberof SpriteAnimation
    * @instance
    * @param {Number} frame
    */
-  ImageAnimation.prototype.playAt = function(frame) {
+  SpriteAnimation.prototype.playAt = function(frame) {
   }
 
   /**
    * Stop the animation.
    * @function stop
-   * @memberof ImageAnimation
+   * @memberof SpriteAnimation
    * @instance
    */
-  ImageAnimation.prototype.stop = function() {
+  SpriteAnimation.prototype.stop = function() {
     this.stopAt(0);
   }
 
   /**
    * Stop the animation at a specific frame.
    * @function stopAt
-   * @memberof ImageAnimation
+   * @memberof SpriteAnimation
    * @instance
    * @param {Number} frame
    */
-  ImageAnimation.prototype.stopAt = function(frame) {
+  SpriteAnimation.prototype.stopAt = function(frame) {
   }
 
   /*
    * Exports
    */
-  global.ImageAnimation = ImageAnimation;
+  global.SpriteAnimation = SpriteAnimation;
 })(window);
