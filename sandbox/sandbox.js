@@ -28,99 +28,99 @@
   })
 
   Chain.append(function(success, failure) {
-  })
-  .success(function() {
-    Log.info('test', 'should not see this');
-  })
-  .commit()
+    })
+    .success(function() {
+      Log.info('test', 'should not see this');
+    })
+    .commit()
 
   Chain.append(function(success, failure) {
-    setTimeout(function() {
-      Log.info('test', 'Chain[0][0]');
-      success()
-    }, 1000);
-  })
-  .success(function() {
-    Log.info('test', 'Chain[0].success()');
-  })
-  .append(function(success, failure) {
-    Log.info('test', 'Chain[0][1]');
+      setTimeout(function() {
+        Log.info('test', 'Chain[0][0]');
+        success()
+      }, 1000);
+    })
+    .success(function() {
+      Log.info('test', 'Chain[0].success()');
+    })
+    .append(function(success, failure) {
+      Log.info('test', 'Chain[0][1]');
 
-    try {
-      throw "Error?"
-    } catch (e) {
-      failure(e)
-    }
-  })
-  .failure(function(failureReasons) {
-    Log.info('test', 'Chain[0].failure()');
-
-    failureReasons.forEach(function(reason) {
-      Exception.handle(reason);
-    });
-  })
-  .commit()
-
-  Chain.append(function(success, failure) {
-    setTimeout(function() {
-      success()
-    }, 2000);
-  })
-  .success(function() {
-    Log.info('test', 'Chain[1].success()');
-  })
-  .commit()
-
-  Chain.append(function(success, failure) {
-    success()
-  })
-  .append(function(success, failure) {
-    success()
-  })
-  .append(function(success, failure) {
-    success()
-  })
-  .append(function(success, failure) {
-    success()
-  })
-  .append(function(success, failure) {
-    success()
-  })
-  .append(function(success, failure) {
-    success()
-  })
-  .success(function() {
-    Log.info('test', 'Chain[2].success()');
-  })
-  .commit()
-  .setOrdered(true)
-  .failure(function() {
-    Log.info('test', 'Ordered.failure()');
-  })
-  .append(function(success, failure) {
-    Log.info('test', 'Ordered[0]');
-
-    setTimeout(function() {
-      Log.info('test', 'Ordered[0].success()');
-      success()
-    }, 1000);
-  })
-  .append(function(success, failure) {
-    Log.info('test', 'Ordered[1]');
-
-    Scheduler.deferred(function() {
       try {
         throw "Error?"
       } catch (e) {
-        Log.info('test', 'Ordered[1].failure()');
         failure(e)
       }
-    });
-  })
-  .success(function() {
-    Log.info('test', 'Ordered.success()');
-  })
-  .commit()
+    })
+    .failure(function(failureReasons) {
+      Log.info('test', 'Chain[0].failure()');
+
+      failureReasons.forEach(function(reason) {
+        Exception.handle(reason);
+      });
+    })
+    .commit()
+
+  Chain.append(function(success, failure) {
+      setTimeout(function() {
+        success()
+      }, 2000);
+    })
+    .success(function() {
+      Log.info('test', 'Chain[1].success()');
+    })
+    .commit()
+
+  Chain.append(function(success, failure) {
+      success()
+    })
+    .append(function(success, failure) {
+      success()
+    })
+    .append(function(success, failure) {
+      success()
+    })
+    .append(function(success, failure) {
+      success()
+    })
+    .append(function(success, failure) {
+      success()
+    })
+    .append(function(success, failure) {
+      success()
+    })
+    .success(function() {
+      Log.info('test', 'Chain[2].success()');
+    })
+    .commit()
+    .setOrdered(true)
+    .failure(function() {
+      Log.info('test', 'Ordered.failure()');
+    })
+    .append(function(success, failure) {
+      Log.info('test', 'Ordered[0]');
+
+      setTimeout(function() {
+        Log.info('test', 'Ordered[0].success()');
+        success()
+      }, 1000);
+    })
+    .append(function(success, failure) {
+      Log.info('test', 'Ordered[1]');
+
+      Scheduler.deferred(function() {
+        try {
+          throw "Error?"
+        } catch (e) {
+          Log.info('test', 'Ordered[1].failure()');
+          failure(e)
+        }
+      });
+    })
+    .success(function() {
+      Log.info('test', 'Ordered.success()');
+    })
+    .commit()
 
   Log.info('test', '--------------------');
 
@@ -169,8 +169,8 @@
 
   Dom.listen(document, 'DOMContentLoaded', function() {
     function makeRect(x, y, w, h, d) {
-      var rect = Dom.createRect(Rect.makeXywh(x, y, w, h), 
-        Transform.Origin, 
+      var rect = Dom.createRect(Rect.makeXywh(x, y, w, h),
+        Transform.Origin,
         Color.randomRgb());
 
       function animate() {
@@ -233,7 +233,7 @@
       Property.set(rect, 'animation-delay', delay + 's');
       Property.set(rect, 'animation-fill-mode', 'both');
       Property.set(rect, 'animation-iteration-count', 'infinite');
-      
+
       Dom.append(document.body, rect);
     }
 
@@ -283,48 +283,48 @@
 
   Log.info('test', '--------------------');
 
-  var anim = new SpriteAnimationCss();
+  var anim = new AnimatedDomSprite();
   anim.setEnsureSrc(true);
-  anim.setPlayback(SpriteAnimation.Playback.Loop);
+  anim.setPlayback(AnimatedSprite.Playback.Loop);
 
   anim.defs.add({
-    name : 'ship',
-    playback : 'loop',
-    fps : 24,
-    src : {
-      url : 'ship.png',
-      width : 119, 
-      height : 2142,
+    name: 'ship',
+    playback: 'loop',
+    fps: 24,
+    src: {
+      url: 'ship.png',
+      width: 119,
+      height: 2142,
     },
-    frames : [
-      { width : 119, height : 119, x : 0, y : 0 },
-      { width : 119, height : 119, x : 0, y : 119 },
-      { width : 119, height : 119, x : 0, y : 238 },
-      { width : 119, height : 119, x : 0, y : 357 },
-      { width : 119, height : 119, x : 0, y : 476 },
-      { width : 119, height : 119, x : 0, y : 595 },
-      { width : 119, height : 119, x : 0, y : 714 },
-      { width : 119, height : 119, x : 0, y : 833 },
-      { width : 119, height : 119, x : 0, y : 952 },
-      { width : 119, height : 119, x : 0, y : 1071 },
-      { width : 119, height : 119, x : 0, y : 1190 },
-      { width : 119, height : 119, x : 0, y : 1309 },
-      { width : 119, height : 119, x : 0, y : 1428 },
-      { width : 119, height : 119, x : 0, y : 1547 },
-      { width : 119, height : 119, x : 0, y : 1666 },
-      { width : 119, height : 119, x : 0, y : 1785 },
-      { width : 119, height : 119, x : 0, y : 1904 },
-      { width : 119, height : 119, x : 0, y : 2023 },
-      { width : 119, height : 119, x : 0, y : 0 },
-      { width : 119, height : 119, x : 0, y : 0 },
-      { width : 119, height : 119, x : 0, y : 0 },
-      { width : 119, height : 119, x : 0, y : 0 },
-      { width : 119, height : 119, x : 0, y : 0 },
-      { width : 119, height : 119, x : 0, y : 0 },
-      { width : 119, height : 119, x : 0, y : 0 },
-      { width : 119, height : 119, x : 0, y : 0 },
-      { width : 119, height : 119, x : 0, y : 0 },
-      { width : 119, height : 119, x : 0, y : 0 }
+    frames: [
+      {width: 119, height: 119, x: 0, y: 0},
+      {width: 119, height: 119, x: 0, y: 119},
+      {width: 119, height: 119, x: 0, y: 238},
+      {width: 119, height: 119, x: 0, y: 357},
+      {width: 119, height: 119, x: 0, y: 476},
+      {width: 119, height: 119, x: 0, y: 595},
+      {width: 119, height: 119, x: 0, y: 714},
+      {width: 119, height: 119, x: 0, y: 833},
+      {width: 119, height: 119, x: 0, y: 952},
+      {width: 119, height: 119, x: 0, y: 1071},
+      {width: 119, height: 119, x: 0, y: 1190},
+      {width: 119, height: 119, x: 0, y: 1309},
+      {width: 119, height: 119, x: 0, y: 1428},
+      {width: 119, height: 119, x: 0, y: 1547},
+      {width: 119, height: 119, x: 0, y: 1666},
+      {width: 119, height: 119, x: 0, y: 1785},
+      {width: 119, height: 119, x: 0, y: 1904},
+      {width: 119, height: 119, x: 0, y: 2023},
+      {width: 119, height: 119, x: 0, y: 0},
+      {width: 119, height: 119, x: 0, y: 0},
+      {width: 119, height: 119, x: 0, y: 0},
+      {width: 119, height: 119, x: 0, y: 0},
+      {width: 119, height: 119, x: 0, y: 0},
+      {width: 119, height: 119, x: 0, y: 0},
+      {width: 119, height: 119, x: 0, y: 0},
+      {width: 119, height: 119, x: 0, y: 0},
+      {width: 119, height: 119, x: 0, y: 0},
+      {width: 119, height: 119, x: 0, y: 0}
     ]
   });
 
@@ -336,12 +336,12 @@
   });
 
   var sheet = new SpriteSheet('sprites.png', {
-    alert_red : { x : 0, y : 197, width : 129, height : 20 },
-    alert_yellow : { x : 0, y : 174, width : 130, height : 23 },
-    btn_backtolobby_no : { x : 0, y : 139, width : 204, height : 35 },
-    btn_backtolobby_yes : { x : 0, y : 104, width : 204, height : 35 },
-    btn_cancel : { x : 0, y : 0, width : 543, height : 49 },
-    btn_ok : { x : 0, y : 49, width : 381, height : 55 }
+    alert_red: {x: 0, y: 197, width: 129, height: 20},
+    alert_yellow: {x: 0, y: 174, width: 130, height: 23},
+    btn_backtolobby_no: {x: 0, y: 139, width: 204, height: 35},
+    btn_backtolobby_yes: {x: 0, y: 104, width: 204, height: 35},
+    btn_cancel: {x: 0, y: 0, width: 543, height: 49},
+    btn_ok: {x: 0, y: 49, width: 381, height: 55}
   });
 
   var sprite = sheet.get('btn_ok');

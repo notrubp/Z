@@ -4,22 +4,24 @@
  * MIT License
  * Copyright (c) 2015 notrubp@gmail.com
  *
- * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation 
- * files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, 
- * modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software 
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation
+ * files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy,
+ * modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software
  * is furnished to do so, subject to the following conditions:
  *
  * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
  *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES 
- * OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE 
- * LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+ * OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+ * LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR
  * IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
  * @license MIT
  * @copyright notrubp@gmail.com 2015
  */
 (function(global) {
+  "use strict";
+
   /*
    * Imports
    */
@@ -87,7 +89,7 @@
   }
 
   /**
-   * Commit the chain. This will copy the current state of the chain into a closure and clear the current state. Any 
+   * Commit the chain. This will copy the current state of the chain into a closure and clear the current state. Any
    * modifications prior to calling commit() will only be applicable to the next call of commit().
    * @function commit
    * @memberof Chain
@@ -106,7 +108,7 @@
 
       /*
        * List of exceptions (reasons) for failure.
-      */
+       */
       var failureReasons = [];
 
       /*
@@ -117,21 +119,21 @@
       /*
        * Invoke a chain link.
        */
-      function invoke(link) {
+      var invoke = function(link) {
         Scheduler.deferred(link.bind(null, success.bind(null, link), failure.bind(null, link)));
       }
 
       /*
        * Invoke the next chain link.
        */
-      function next() {
+      var next = function() {
         invoke(links.shift());
       }
 
       /**
        * Remove a chain link.
        */
-      function remove(link) {
+      var remove = function(link) {
         var i = links.indexOf(link);
 
         if (i != -1) {
@@ -142,7 +144,7 @@
       /*
        * Handles success of a chain link and final (all links have completed) success.
        */
-      function onSuccess() {
+      var onSuccess = function() {
         if (ordered && links.length > 0) {
           next();
         } else if (links.length == 0) {
@@ -160,7 +162,7 @@
       /*
        * Handles failure of a chain link.
        */
-      function onFailure() {
+      var onFailure = function() {
         if (ordered && links.length > 0) {
           next();
         } else if (links.length == 0) {
@@ -173,7 +175,7 @@
       /*
        * Link success callback.
        */
-      function success(link) {
+      var success = function(link) {
         remove(link);
         onSuccess();
       }
@@ -181,7 +183,7 @@
       /*
        * Link failure callback.
        */
-      function failure(link, exception) {
+      var failure = function(link, exception) {
         /*
          * Mark for later.
          */

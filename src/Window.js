@@ -1,5 +1,5 @@
 /**
- * CSS steps generator.
+ *
  *
  * MIT License
  * Copyright (c) 2015 notrubp@gmail.com
@@ -23,49 +23,13 @@
   "use strict";
 
   /**
-   * CSS steps generator.
-   * @class Steps
+   *
    */
-  var Steps = function(numberOfSteps, direction) {
-    this.css = 'steps(' + numberOfSteps + ',' + (Steps.Direction.Start === direction ? 'start' : 'end') + ')';
+  var Window = function() {
   }
-
-  /*
-   * Property hook.
-   */
-  Steps.prototype.__propertyHook = function() {
-    return this.css;
-  }
-
-  /**
-   * Make a new steps.
-   * @function make
-   * @memberof Steps
-   * @static
-   * @param {Number} numberOfSteps
-   * @param {Steps.Direction} direction
-   * @returns {Steps}
-   */
-  Steps.make = function(numberOfSteps, direction) {
-    return new Steps(numberOfSteps, direction || Steps.Direction.End);
-  }
-
-  /**
-   * Direction enumeration.
-   * @memberof Steps
-   * @readonly
-   * @static
-   * @enum {Number}
-   */
-  Steps.Direction = {
-    Start: 0,
-    End: 1
-  }
-
-  Object.freeze(Steps.Direction);
 
   /*
    * Exports
    */
-  global.Steps = Steps;
+  global.Window = Window;
 })(window);

@@ -4,22 +4,24 @@
  * MIT License
  * Copyright (c) 2015 notrubp@gmail.com
  *
- * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation 
- * files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, 
- * modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software 
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation
+ * files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy,
+ * modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software
  * is furnished to do so, subject to the following conditions:
  *
  * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
  *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES 
- * OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE 
- * LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+ * OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+ * LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR
  * IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
  * @license MIT
  * @copyright notrubp@gmail.com 2015
  */
 (function(global) {
+  "use strict";
+
   /**
    * Represents a 2-dimensional cartesian point.
    * @class Point
@@ -98,7 +100,7 @@
    * @instance
    * @param {Number} y
    * @returns {Point}
-  */
+   */
   Point.prototype.setY = function(y) {
     this.y = y;
     return this;
@@ -121,10 +123,12 @@
    * @memberof Point
    * @instance
    * @param {Point} p
-   * @returns {Point} The sum of this and p.
+   * @returns {Point}
    */
   Point.prototype.add = function(p) {
-    return new Point(this.x + p.x, this.y + p.y);
+    this.x += p.x;
+    this.y += p.y;
+    return this;
   }
 
   /**
@@ -133,10 +137,12 @@
    * @memberof Point
    * @instance
    * @param {Point} p
-   * @returns {Point} The difference of this and p.
+   * @returns {Point}
    */
   Point.prototype.sub = function(p) {
-    return new Point(this.x - p.x, this.y - p.y);
+    this.x -= p.x;
+    this.y -= p.y;
+    return this;
   }
 
   /**
@@ -145,10 +151,12 @@
    * @memberof Point
    * @instance
    * @param {Number} s
-   * @returns {Point} This point scaled by s.
+   * @returns {Point}
    */
   Point.prototype.scale = function(s) {
-    return new Point(this.x * s, this.y * y);
+    this.x *= s;
+    this.y *= y;
+    return this;
   }
 
   /**
@@ -157,7 +165,7 @@
    * @memberof Point
    * @instance
    * @returns {Number} The squared distance of this {@link Point}.
-  */
+   */
   Point.prototype.lengthSq = function() {
     return this.x * this.x + this.y * this.y;
   }
@@ -168,7 +176,7 @@
    * @memberof Point
    * @instance
    * @returns {Number} The distance of this {@link Point}.
-  */
+   */
   Point.prototype.length = function() {
     return Math.sqrt(this.lengthSq());
   }
@@ -180,7 +188,7 @@
    * @memberof Point
    * @instance
    * @returns {Number} The dot product of this {@link Point}.
-  */
+   */
   Point.prototype.dot = function(p) {
     return this.x * p.x + this.y * p.y;
   }
@@ -190,11 +198,18 @@
    * @function normalize
    * @memberof Point
    * @instance
-   * @returns {Point} This {@link Point} normalized.
-  */
+   * @returns {Point}
+   */
   Point.prototype.normalize = function() {
     var l = this.length();
-    return new Point(this.x / l, this.y / l);
+
+    if (l != 0)
+    {
+      this.x /= l;
+      this.y /= l;
+    }
+
+    return this;
   }
 
   /**
@@ -235,6 +250,6 @@
 
   /*
    * Exports
-  */
+   */
   global.Point = Point;
 })(window);

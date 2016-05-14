@@ -4,22 +4,24 @@
  * MIT License
  * Copyright (c) 2015 notrubp@gmail.com
  *
- * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation 
- * files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, 
- * modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software 
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation
+ * files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy,
+ * modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software
  * is furnished to do so, subject to the following conditions:
  *
  * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
  *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES 
- * OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE 
- * LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+ * OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+ * LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR
  * IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
  * @license MIT
  * @copyright notrubp@gmail.com 2015
  */
 (function(global) {
+  "use strict";
+
   /*
    * Imports
    */
@@ -77,7 +79,7 @@
   }
 
   /**
-   * Attach a property hook to an element. Whenever a property is set, it will first pass through all hooks and 
+   * Attach a property hook to an element. Whenever a property is set, it will first pass through all hooks and
    * will only continue with applying the property if all hooks return false.
    * @function hook
    * @memberof Property
@@ -99,7 +101,7 @@
    * Queue
    */
 
-  var queues = { };
+  var queues = {};
 
   function ensureUid(element) {
     if (!element.__propertyUid) {
@@ -109,7 +111,7 @@
 
   function ensureQueue(element) {
     var uid = element.__propertyUid;
-      
+
     if (!queues[uid]) {
       queues[uid] = [];
     }
@@ -120,11 +122,11 @@
   function insert(queue, callback, time, waitForNextFrame) {
     time = time || 0;
 
-    var entry = { 
-      'callback' : callback,
-      'time' : time, 
-      'breakCurrentFrame' : time > 0,
-      'waitForNextFrame' : waitForNextFrame 
+    var entry = {
+      'callback': callback,
+      'time': time,
+      'breakCurrentFrame': time > 0,
+      'waitForNextFrame': waitForNextFrame
     };
 
     var i = -1;
@@ -181,7 +183,7 @@
      * Go through all the queues and evaluate the entries.
      */
     Object.keys(queues).forEach(_flush);
-      
+
     if (hasNext) {
       schedule();
     } else {
@@ -208,7 +210,7 @@
          * Mark as no longer blocking.
          */
         entry.waitForNextFrame = false;
-        
+
         /* 
          * This entry needs a fresh frame before it can be applied.
          */
@@ -224,7 +226,8 @@
       var shouldBreak = false;
 
       switch (result) {
-        case 'ok' : {
+        case 'ok' :
+        {
           Log.info('property', 'applied -> ' + key);
 
           /*
@@ -241,7 +244,8 @@
 
           break;
         }
-        case 'fail' : {
+        case 'fail' :
+        {
           Log.error('property', 'fail -> ' + key);
 
           /* 
@@ -250,14 +254,15 @@
            */
           safeRemove(queue, entry);
         }
-        default : {
+        default :
+        {
           /* 
            * This entry did not apply, wait for the next frame.
            */
           shouldBreak = true;
 
           break;
-        }          
+        }
       }
 
       if (shouldBreak) {
@@ -299,17 +304,20 @@
 
   function schedule() {
     switch (state) {
-      case 'awake' : {
+      case 'awake' :
+      {
         break;
       }
-      case 'sleeping' : {
+      case 'sleeping' :
+      {
         Log.info('property', 'awake');
         last = Time.now();
       }
-      case 'flushing' : {
+      case 'flushing' :
+      {
         state = 'awake';
         Scheduler.raf(flush);
-        break;        
+        break;
       }
     }
   }
@@ -318,7 +326,7 @@
    * Platform fixups.
    */
 
-  var fixups = { };
+  var fixups = {};
 
   function camelCaseProperty(prop) {
     return prop.replace(/-(\w)/g, function(match, p1) {
@@ -386,7 +394,7 @@
     prop = forceCamelCaseProperty ? camelCaseProperty(prop) : prop;
     return prop;
   }
-  
+
   /**
    * Fixup a CSS property with no forced camel casing.
    * @function fixupNocc
@@ -434,9 +442,9 @@
    * Property.set(element, 'background-color', 'white');
    *
    * // Set the background color to black 1 second from now.
-   * Property.set(element, 
-   *   'background-color', 
-   *   'black', 
+   * Property.set(element,
+   *   'background-color',
+   *   'black',
    *   new Date().getTime() + 1000);
    */
   Property.set = function(element, property, value, time, waitForNextFrame) {
@@ -455,7 +463,7 @@
    * @param {Object} element
    * @param {String} prop
    * @returns {String} The value of an element's property.
-  */
+   */
   Property.get = function(element, prop) {
     return element.style[prop];
   }
@@ -492,7 +500,7 @@
   Property.enqueue = function(element, callback, time, waitForNextFrame) {
     ensureUid(element);
     schedule();
-    queue = ensureQueue(element);
+    var queue = ensureQueue(element);
     insert(queue, callback, time, waitForNextFrame);
   }
 
@@ -505,19 +513,19 @@
    */
   Property.clear = function(element) {
     ensureUid(element);
-    queue = ensureQueue(element);
+    var queue = ensureQueue(element);
     queue.splice(0, queue.length);
   }
 
   /**
-   * Forces browsers to re-evaluate the inlined CSS of the provided element. 
+   * Forces browsers to re-evaluate the inlined CSS of the provided element.
    * @function forceReflow
    * @memberof Property
    * @static
    * @param {Object} element
    */
   Property.forceReflow = function(element) {
-    element.offsetWidth = element.offsetWidth;
+    (function(){})(element.offsetWidth);
   }
 
   /*

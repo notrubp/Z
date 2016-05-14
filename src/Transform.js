@@ -5,33 +5,35 @@
  * MIT License
  * Copyright (c) 2015 notrubp@gmail.com
  *
- * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation 
- * files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, 
- * modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software 
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation
+ * files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy,
+ * modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software
  * is furnished to do so, subject to the following conditions:
  *
  * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
  *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES 
- * OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE 
- * LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+ * OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+ * LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR
  * IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
  * @license MIT
  * @copyright notrubp@gmail.com 2015
  */
 (function(global) {
+  "use strict";
+
   /*
    * Imports
    */
   var Util = global.Util;
   var Unit = global.Unit;
 
-  function fixup(_this) {
-    if (_this.css === 'none') {
-      _this.css = '';
-    } else if (_this.css.length > 0) {
-      _this.css += ' ';
+  function fixup() {
+    if (this.css === 'none') {
+      this.css = '';
+    } else if (this.css.length > 0) {
+      this.css += ' ';
     }
   }
 
@@ -74,7 +76,7 @@
 
     return false;
   }
-  
+
   /**
    * Set to no transform.
    * @function none
@@ -101,7 +103,7 @@
    * @returns {Transform}
    */
   Transform.prototype.matrix = function(xx, xy, yx, yy, tx, ty) {
-    fixup(this);
+    fixup.call(this);
     this.css += 'matrix(' + xx + ',' + xy + ',' + yx + ',' + yy + ',' + tx + ',' + ty + ')';
     return this;
   }
@@ -130,7 +132,7 @@
    * @returns {Transform}
    */
   Transform.prototype.matrix3d = function(xx, xy, xz, xw, yx, yy, yz, yw, zx, zy, zz, zw, tx, ty, tz, tw) {
-    fixup(this);
+    fixup.call(this);
     this.css += 'matrix3d(' + xx + ',' + xy + ',' + xz + ',' + xw + ',' + yx + ',' + yy + ',' + yz + ',' + yw + ',' + zx + ',' + zy + ',' + zz + ',' + zw + ',' + tx + ',' + ty + ',' + tz + ',' + tw + ')';
     return this;
   }
@@ -145,7 +147,7 @@
    * @returns {Transform}
    */
   Transform.prototype.translate = function(x, y) {
-    fixup(this);
+    fixup.call(this);
     this.css += 'translate(' + x + ',' + y + ')';
     return this;
   }
@@ -161,7 +163,7 @@
    * @returns {Transform}
    */
   Transform.prototype.translate3d = function(x, y, z) {
-    fixup(this);
+    fixup.call(this);
     this.css += 'translate3d(' + x + ',' + y + ',' + z + ')';
     return this;
   }
@@ -175,7 +177,7 @@
    * @returns {Transform}
    */
   Transform.prototype.translateX = function(x) {
-    fixup(this);
+    fixup.call(this);
     this.css += 'translateX(' + x + ')';
     return this;
   }
@@ -189,7 +191,7 @@
    * @returns {Transform}
    */
   Transform.prototype.translateY = function(y) {
-    fixup(this);
+    fixup.call(this);
     this.css += 'translateY(' + y + ')';
     return this;
   }
@@ -203,7 +205,7 @@
    * @returns {Transform}
    */
   Transform.prototype.translateZ = function(z) {
-    fixup(this);
+    fixup.call(this);
     this.css += 'translateZ(' + z + ')';
     return this;
   }
@@ -218,7 +220,7 @@
    * @returns {Transform}
    */
   Transform.prototype.scale = function(x, y) {
-    fixup(this);
+    fixup.call(this);
     this.css += 'scale(' + x + ',' + y + ')';
     return this;
   }
@@ -234,7 +236,7 @@
    * @returns {Transform}
    */
   Transform.prototype.scale3d = function(x, y, z) {
-    fixup(this);
+    fixup.call(this);
     this.css += 'scale3d(' + x + ',' + y + ',' + z + ')';
     return this;
   }
@@ -248,7 +250,7 @@
    * @returns {Transform}
    */
   Transform.prototype.scaleX = function(x) {
-    fixup(this);
+    fixup.call(this);
     this.css += 'scaleX(' + x + ')';
     return this;
   }
@@ -262,7 +264,7 @@
    * @returns {Transform}
    */
   Transform.prototype.scaleY = function(y) {
-    fixup(this);
+    fixup.call(this);
     this.css += 'scaleY(' + y + ')';
     return this;
   }
@@ -276,7 +278,7 @@
    * @returns {Transform}
    */
   Transform.prototype.scaleZ = function(z) {
-    fixup(this);
+    fixup.call(this);
     this.css += 'scaleZ(' + z + ')';
     return this;
   }
@@ -290,7 +292,7 @@
    * @returns {Transform}
    */
   Transform.prototype.rotate = function(a) {
-    fixup(this);
+    fixup.call(this);
     this.css += 'rotate(' + a + 'rad)';
     return this;
   }
@@ -306,7 +308,7 @@
    * @returns {Transform}
    */
   Transform.prototype.rotate3d = function(x, y, z) {
-    fixup(this);
+    fixup.call(this);
     this.css += 'rotate3d(' + x + 'rad,' + y + 'rad,' + z + 'rad)';
     return this;
   }
@@ -320,7 +322,7 @@
    * @returns {Transform}
    */
   Transform.prototype.rotateX = function(x) {
-    fixup(this);
+    fixup.call(this);
     this.css += 'rotateX(' + x + 'rad)';
     return this;
   }
@@ -334,7 +336,7 @@
    * @returns {Transform}
    */
   Transform.prototype.rotateY = function(y) {
-    fixup(this);
+    fixup.call(this);
     this.css += 'rotateY(' + y + 'rad)';
     return this;
   }
@@ -348,7 +350,7 @@
    * @returns {Transform}
    */
   Transform.prototype.rotateZ = function(z) {
-    fixup(this);
+    fixup.call(this);
     this.css += 'rotateZ(' + z + 'rad)';
     return this;
   }
@@ -363,7 +365,7 @@
    * @returns {Transform}
    */
   Transform.prototype.skew = function(x, y) {
-    fixup(this);
+    fixup.call(this);
     this.css += 'skew(' + x + 'rad,' + y + 'rad)';
     return this;
   }
@@ -377,7 +379,7 @@
    * @returns {Transform}
    */
   Transform.prototype.skewX = function(x) {
-    fixup(this);
+    fixup.call(this);
     this.css += 'skewX(' + x + 'rad)';
     return this;
   }
@@ -391,7 +393,7 @@
    * @returns {Transform}
    */
   Transform.prototype.skewY = function(y) {
-    fixup(this);
+    fixup.call(this);
     this.css += 'skewY(' + y + 'rad)';
     return this;
   }
